@@ -7,6 +7,7 @@
     import NavMenu from '../c8s/NavMenu.svelte'
     import Router from 'svelte-spa-router'
     import ProjectMembers from './ProjectMembers.svelte'
+    import ProjectIssues from './ProjectIssues.svelte'
 
     export let params;
 
@@ -20,6 +21,10 @@
             link: `/projects/${params.id}/members`,
             title: 'Members',
             icon: '/img/user-groups.svg'
+        },
+        {
+            link: `/project-edit/${params.id}`,
+            title: 'Edit project'
         }
     ]
 
@@ -27,7 +32,8 @@
     let loading = true;
 
     let routes = {
-        '/members': ProjectMembers
+        '/members': ProjectMembers,
+        '/': ProjectIssues
     }
 
     onMount(async () => {
