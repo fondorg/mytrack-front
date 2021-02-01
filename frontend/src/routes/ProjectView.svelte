@@ -6,6 +6,7 @@
     import CenteredFlex from "../c8s/CenteredFlex.svelte";
     import NavMenu from '../c8s/NavMenu.svelte'
     import Router from 'svelte-spa-router'
+    import {wrap} from 'svelte-spa-router/wrap'
     import ProjectMembers from './ProjectMembers.svelte'
     import ProjectIssues from './ProjectIssues.svelte'
 
@@ -13,7 +14,7 @@
 
     let projectMenu = [
         {
-            link: `/projects/${params.id}`,
+            link: `/projects/${params.id}/issues`,
             title: 'Issues',
             icon: '/img/document.svg'
         },
@@ -33,7 +34,10 @@
 
     let routes = {
         '/members': ProjectMembers,
-        '/': ProjectIssues
+        '/issues': wrap({
+            component: ProjectIssues,
+            props: {projectId: params.id}
+        })
     }
 
     onMount(async () => {

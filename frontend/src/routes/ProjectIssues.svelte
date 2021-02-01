@@ -1,10 +1,10 @@
 <script>
     import CenteredFlex from '../c8s/CenteredFlex.svelte'
+    import IssueList from '../c8s/IssueList.svelte'
 
+    export let projectId;
 </script>
 
 <CenteredFlex>
-    <div>
-        Project issues
-    </div>
+    <IssueList projectId="{projectId}"/>
 </CenteredFlex>

@@ -12,7 +12,7 @@ const OIDC_ISSUER = process.env.OIDC_ISSUER;
 const OIDC_CLIENT_ID = process.env.OIDC_CLIENT_ID;
 const OIDC_REDIRECT_URL = process.env.OIDC_REDIRECT_URL;
 const OIDC_LOGOUT_REDIRECT_URL = process.env.OIDC_LOGOUT_REDIRECT_URL;
-const API_BASE_URL = process.env.API_BASE_URL
+const API_BASE_URL = process.env.API_BASE_URL.replace(/\/$/, "");
 
 function serve() {
     let server;

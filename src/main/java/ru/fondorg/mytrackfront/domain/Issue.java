@@ -1,0 +1,15 @@
+package ru.fondorg.mytrackfront.domain;
+
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+public class Issue {
+    private Long id;
+
+    private String title;
+
+    private String description;
+
+}

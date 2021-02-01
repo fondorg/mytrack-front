@@ -6,14 +6,16 @@
 
     let projects = [];
     onMount(async () => {
-        projects = await performRequest();
+        //projects = await performRequest();
+        const api = new Api();
+        projects = await api.getProjects();
     })
 
-    async function performRequest() {
+    /*async function performRequest() {
         const api = new Api();
         projects = await api.getProjects();
         return projects;
-    }
+    }*/
 </script>
 
 

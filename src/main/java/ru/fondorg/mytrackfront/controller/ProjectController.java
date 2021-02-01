@@ -6,8 +6,10 @@ import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.*;
 import ru.fondorg.mytrackfront.config.MyTrackProperties;
+import ru.fondorg.mytrackfront.domain.Issue;
 import ru.fondorg.mytrackfront.domain.Project;
 import ru.fondorg.mytrackfront.domain.ProjectProjection;
+import ru.fondorg.mytrackfront.util.ApiPathBuilder;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -23,19 +25,18 @@ public class ProjectController {
 
     private final MyTrackProperties myTrackProperties;
 
-    private String baseUrl;
+    private final ApiPathBuilder apiPathBuilder;
 
-    private final String PROJECTS_PATH = "/projects";
+    private final String PROJECTS_PATH = "projects";
+    private final String ISSUES_PATH = "issues";
 
     @PostConstruct
     public void init() {
-        baseUrl = myTrackProperties.getMytrackSrvBaseUrl();
     }
 
     @GetMapping
     public List<ProjectProjection> getAllProjects() {
-        return exchangeAsList(baseUrl + PROJECTS_PATH, new ParameterizedTypeReference<List<ProjectProjection>>() {
-        });
+        return exchangeAsList(apiPathBuilder.buildPath(PROJECTS_PATH));
     }
 
     @GetMapping("/{id}")
@@ -45,7 +46,7 @@ public class ProjectController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }*/
-        return keycloakRestTemplate.getForObject(baseUrl + PROJECTS_PATH + "/" + id, Project.class);
+        return keycloakRestTemplate.getForObject(apiPathBuilder.buildPath(PROJECTS_PATH, id), Project.class);
     }
 
     @PostMapping
@@ -55,10 +56,17 @@ public class ProjectController {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        return keycloakRestTemplate.postForObject(baseUrl + PROJECTS_PATH, project, Project.class);
+        return keycloakRestTemplate.postForObject(apiPathBuilder.buildPath(PROJECTS_PATH), project, Project.class);
     }
 
-    public <T> List<T> exchangeAsList(String uri, ParameterizedTypeReference<List<T>> responseType) {
-        return keycloakRestTemplate.exchange(uri, HttpMethod.GET, null, responseType).getBody();
+    @GetMapping("/{id}/issues")
+    public List<Issue> getProjectIssues(@PathVariable String id) {
+        return exchangeAsList(apiPathBuilder.buildPath(PROJECTS_PATH, id, ISSUES_PATH));
+    }
+
+    public <T> List<T> exchangeAsList(String uri) {
+        return keycloakRestTemplate.exchange(uri, HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<T>>() {
+                }).getBody();
     }
 }

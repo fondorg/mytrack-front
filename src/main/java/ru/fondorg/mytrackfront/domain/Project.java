@@ -6,7 +6,7 @@ import javax.validation.constraints.NotNull;
 
 @Data
 public class Project {
-    private Integer id;
+    private Long id;
 
     @NotNull
     private String title;
