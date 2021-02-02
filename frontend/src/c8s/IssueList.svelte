@@ -7,8 +7,7 @@
 
     onMount(async () => {
         const api = new Api();
-        issues = await api.getProjectIssues(projectId);
-        console.log(issues);
+        issues = await api.getProjectIssues(projectId) || [];
     })
 </script>
 

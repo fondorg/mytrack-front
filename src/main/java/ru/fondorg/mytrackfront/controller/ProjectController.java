@@ -3,6 +3,8 @@ package ru.fondorg.mytrackfront.controller;
 import lombok.RequiredArgsConstructor;
 import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.bind.annotation.*;
 import ru.fondorg.mytrackfront.config.MyTrackProperties;
@@ -10,6 +12,7 @@ import ru.fondorg.mytrackfront.domain.Issue;
 import ru.fondorg.mytrackfront.domain.Project;
 import ru.fondorg.mytrackfront.domain.ProjectProjection;
 import ru.fondorg.mytrackfront.util.ApiPathBuilder;
+import ru.fondorg.mytrackfront.util.PageParamMapper;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -26,6 +29,8 @@ public class ProjectController {
     private final MyTrackProperties myTrackProperties;
 
     private final ApiPathBuilder apiPathBuilder;
+
+    private final PageParamMapper pageParamMapper;
 
     private final String PROJECTS_PATH = "projects";
     private final String ISSUES_PATH = "issues";
@@ -60,13 +65,21 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}/issues")
-    public List<Issue> getProjectIssues(@PathVariable String id) {
-        return exchangeAsList(apiPathBuilder.buildPath(PROJECTS_PATH, id, ISSUES_PATH));
+    public Page<Issue> getProjectIssues(@PathVariable String id,
+                                        @RequestParam(required = false, defaultValue = "0") int page,
+                                        @RequestParam(required = false, defaultValue = "0") int size) {
+        return exchangeAsPage(apiPathBuilder.buildPath(pageParamMapper.mapParams(page, size), PROJECTS_PATH, id, ISSUES_PATH));
     }
 
     public <T> List<T> exchangeAsList(String uri) {
         return keycloakRestTemplate.exchange(uri, HttpMethod.GET, null,
                 new ParameterizedTypeReference<List<T>>() {
+                }).getBody();
+    }
+
+    public <T> PageImpl<T> exchangeAsPage(String uri) {
+        return keycloakRestTemplate.exchange(uri, HttpMethod.GET, null,
+                new ParameterizedTypeReference<PageImpl<T>>() {
                 }).getBody();
     }
 }

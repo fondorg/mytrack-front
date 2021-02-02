@@ -5,6 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import ru.fondorg.mytrackfront.config.MyTrackProperties;
 
+import java.util.HashMap;
+import java.util.Map;
+
 class ApiPathBuilderTest {
 
     private MyTrackProperties properties;
@@ -20,8 +23,11 @@ class ApiPathBuilderTest {
         properties.setApiPort(port);
     }
 
+    /**
+     * Checks the building of the correct api uri
+     */
     @Test
-    public void pathCompose() throws Exception {
+    public void pathCompose() {
         ApiPathBuilder builder = new ApiPathBuilder(properties);
         String testPath = "projects";
         String uri = builder.buildPath(testPath);
@@ -29,6 +35,19 @@ class ApiPathBuilderTest {
                 String.format("%s://%s:%d/%s/%s/%s", schema, host, port,
                         ApiPathBuilder.API_PREFIX, ApiPathBuilder.API_VER, testPath));
 
+    }
+
+    /**
+     * Checks the specified query params substitution
+     */
+    @Test
+    public void pathWithQueryParams() {
+        ApiPathBuilder builder = new ApiPathBuilder(properties);
+        Map<String, Object> queryParams = new HashMap<>();
+        queryParams.put("page", 1);
+        queryParams.put("size", 20);
+        String uri = builder.buildPath(queryParams, "issues");
+        Assertions.assertThat(uri).contains("page=1").contains("size=20");
     }
 
 }

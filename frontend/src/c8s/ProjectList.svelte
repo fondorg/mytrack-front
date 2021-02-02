@@ -8,7 +8,7 @@
     onMount(async () => {
         //projects = await performRequest();
         const api = new Api();
-        projects = await api.getProjects();
+        projects = await api.getProjects() || [];
     })
 
     /*async function performRequest() {

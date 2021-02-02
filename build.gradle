@@ -27,6 +27,8 @@ dependencies {
 	implementation 'org.keycloak:keycloak-spring-boot-starter'
 	implementation 'org.springframework.security:spring-security-core'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	annotationProcessor "org.springframework.boot:spring-boot-configuration-processor"
+    implementation 'org.springframework.data:spring-data-commons'
 
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'

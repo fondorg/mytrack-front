@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.fondorg.mytrackfront.config.MyTrackProperties;
 
+import java.util.Map;
+
 @Component
 @RequiredArgsConstructor
 public class ApiPathBuilder {
@@ -16,6 +18,7 @@ public class ApiPathBuilder {
 
     /**
      * Builds API path with the given segments
+     *
      * @param segments segments of the API path
      * @return API URL
      */
@@ -24,5 +27,21 @@ public class ApiPathBuilder {
         return builder.scheme(properties.getApiSchema()).host(properties.getApiHost()).port(properties.getApiPort())
                 .pathSegment(API_PREFIX, API_VER)
                 .pathSegment(segments).toUriString();
+    }
+
+    /**
+     * Builds API path with specified query params and other url segments
+     *
+     * @param queryParams query params of the API URI
+     * @param segments    segments of the API path
+     * @return API URL
+     */
+    public String buildPath(Map<String, Object> queryParams, String... segments) {
+        UriComponentsBuilder builder = UriComponentsBuilder.newInstance();
+        builder.scheme(properties.getApiSchema()).host(properties.getApiHost()).port(properties.getApiPort())
+                .pathSegment(API_PREFIX, API_VER)
+                .pathSegment(segments);
+        queryParams.forEach(builder::queryParam);
+        return builder.toUriString();
     }
 }

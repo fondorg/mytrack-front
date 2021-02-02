@@ -15,4 +15,6 @@ public class MyTrackProperties {
 
     private String apiSchema;
 
+    private Integer defaultIssuesPageSize = 20;
+
 }
