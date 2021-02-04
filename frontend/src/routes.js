@@ -5,6 +5,7 @@ import Home from './routes/Home.svelte';
 import Workspace from './routes/Workspace.svelte'
 import Login from './routes/Login.svelte'
 import ProjectEdit from './routes/ProjectEdit.svelte'
+import IssueEdit from './routes/IssueEdit.svelte'
 import ProjectView from './routes/ProjectView.svelte'
 import {wrap} from 'svelte-spa-router/wrap'
 import {isAuthenticated} from './c8s/OidcContext.svelte'
@@ -50,6 +51,14 @@ let authRoutes = {
     }),
     '/project-edit/:id': wrap({
         component: ProjectEdit,
+        conditions: authConditions
+    }),
+    '/projects/:id/issue-edit': wrap({
+        component: IssueEdit,
+        conditions: authConditions
+    }),
+    '/projects/:id/issue-edit/:id': wrap({
+        component: IssueEdit,
         conditions: authConditions
     }),
     '/bar': wrap({

@@ -13,6 +13,8 @@
 
 
 <h1 class="font-bold">Issues</h1>
-{#each issues as issue}
-    issue.title
-{/each}
+{#if issues.content}
+    {#each issues.content as issue}
+        issue.title
+    {/each}
+{/if}

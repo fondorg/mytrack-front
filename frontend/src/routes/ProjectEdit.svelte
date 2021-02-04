@@ -40,7 +40,6 @@
         if (params.id) {
             try {
                 project = await api.getProject(params.id);
-                console.log('project loaded')
             } catch (e) {
                 console.log(e);
             }
@@ -60,6 +59,4 @@
         <h1 class="text-xl mb-4">{params.id ? 'New project' : `Edit project: ${name}`}</h1>
         <Form dataObject="{project}" fields="{fields}" onSubmit={saveProject} constraints="{constraints}"/>
     </CenteredFlex>
-
-
 </Layout>

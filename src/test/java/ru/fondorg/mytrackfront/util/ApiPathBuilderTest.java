@@ -28,12 +28,11 @@ class ApiPathBuilderTest {
      */
     @Test
     public void pathCompose() {
-        ApiPathBuilder builder = new ApiPathBuilder(properties);
-        String testPath = "projects";
+        ApiPathBuilder builder = new ApiV1PathBuilder(properties);
+        String testPath = "api/v1/projects";
         String uri = builder.buildPath(testPath);
         Assertions.assertThat(uri).isEqualTo(
-                String.format("%s://%s:%d/%s/%s/%s", schema, host, port,
-                        ApiPathBuilder.API_PREFIX, ApiPathBuilder.API_VER, testPath));
+                String.format("%s://%s:%d/%s", schema, host, port, testPath));
 
     }
 
@@ -42,11 +41,11 @@ class ApiPathBuilderTest {
      */
     @Test
     public void pathWithQueryParams() {
-        ApiPathBuilder builder = new ApiPathBuilder(properties);
+        ApiV1PathBuilder builder = new ApiV1PathBuilder(properties);
         Map<String, Object> queryParams = new HashMap<>();
         queryParams.put("page", 1);
         queryParams.put("size", 20);
-        String uri = builder.buildPath(queryParams, "issues");
+        String uri = builder.buildSegments(queryParams, "issues");
         Assertions.assertThat(uri).contains("page=1").contains("size=20");
     }
 
