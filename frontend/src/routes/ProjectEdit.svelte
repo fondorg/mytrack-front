@@ -50,7 +50,7 @@
     async function saveProject(project) {
         let saved = await api.saveProject(project);
         push("#/projects")
-    }
+    params.id}
 </script>
 
 <Layout>

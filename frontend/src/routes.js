@@ -41,6 +41,10 @@ let authRoutes = {
        component:  ProjectView,
         conditions: authConditions
     }),
+    '/projects/:id/edit': wrap( {
+        component:  ProjectEdit,
+        conditions: authConditions
+    }),
     '/projects/:id/*': wrap( {
         component:  ProjectView,
         conditions: authConditions

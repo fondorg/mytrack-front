@@ -1,6 +1,7 @@
 <script>
     import InstanceEdit from '../c8s/InstanceEdit.svelte'
     import Api from "../service/api-service";
+    import {onMount} from 'svelte'
 
     export let params = {}
     export let projectId;
@@ -19,7 +20,7 @@
             autofocus: true
         },
         description: {
-            type: 'text',
+            type: 'textarea',
             label: 'Description'
         }
     }
@@ -32,8 +33,12 @@
         }
     };
 
+    onMount(() => {
+        console.log(params);
+    })
+
     async function getIssue() {
-        return await api.getProjectIssue(projectId, params.issuesId);
+        return await api.getProjectIssue(projectId, params.issueId);
     }
 
     async function saveIssue(issue) {
@@ -42,5 +47,5 @@
 
 </script>
 
-<InstanceEdit dataObject="{issue}" isNew="{params.id}" name="Issue" {fields} {constraints}
+<InstanceEdit dataObject="{issue}" isNew="{params.issueId === undefined}" name="Issue" {fields} {constraints}
               {redirect} readFunc="{getIssue}" saveFunc="{saveIssue}"/>

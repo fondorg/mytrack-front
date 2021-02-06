@@ -12,4 +12,7 @@ public class Issue {
 
     private String description;
 
+    private User author;
+
+    private Long projectId;
 }

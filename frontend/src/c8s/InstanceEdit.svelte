@@ -24,14 +24,8 @@
     onMount(async () => {
         if (!isNew) {
             dataObject = await readFunc();
+            console.log(dataObject);
         }
-        /*if (params.id) {
-            try {
-                project = await api.getProject(params.id);
-            } catch (e) {
-                console.log(e);
-            }
-        }*/
         loading = false;
     })
 
@@ -41,10 +35,8 @@
     }
 </script>
 
-<Layout>
-    <CenteredFlex extraClasses="relative">
-        <BusyScreen loading="{loading}"/>
-        <h1 class="text-xl mb-4">{isNew ? `New ${name}` : `Edit ${name}`}</h1>
-        <Form dataObject="{dataObject}" fields="{fields}" onSubmit={saveInstance} constraints="{constraints}"/>
-    </CenteredFlex>
-</Layout>
+<CenteredFlex extraClasses="relative">
+    <BusyScreen loading="{loading}"/>
+    <h1 class="text-xl mb-4">{isNew ? `New ${name}` : `Edit ${name}`}</h1>
+    <Form dataObject="{dataObject}" fields="{fields}" onSubmit={saveInstance} constraints="{constraints}"/>
+</CenteredFlex>
