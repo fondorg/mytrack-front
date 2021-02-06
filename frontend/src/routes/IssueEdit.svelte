@@ -3,8 +3,9 @@
     import Api from "../service/api-service";
 
     export let params = {}
+    export let projectId;
     let api = new Api();
-    let redirect = "issues"
+    let redirect = `#/projects/${projectId}/issues`
 
     let issue = {
         title: undefined,
@@ -32,11 +33,11 @@
     };
 
     async function getIssue() {
-        return await api.getIssue(params.id);
+        return await api.getProjectIssue(projectId, params.issuesId);
     }
 
     async function saveIssue(issue) {
-        return await api.saveIssue(issue);
+        return await api.saveProjectIssue(projectId, issue);
     }
 
 </script>

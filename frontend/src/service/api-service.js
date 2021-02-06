@@ -45,6 +45,24 @@ export default class Api {
             .get(`${this.baseUrl}/projects/${projectId}/issues`)
             .then(response => response.data)
             .catch(err => console.log(err));
+    }
+
+    async getProjectIssue(projectId, issueId) {
+        this.defineHeaders();
+        return axios
+            .get(`${this.baseUrl}/projects/${projectId}/issues/${issueId}`)
+            .then(response => response.data)
+            .catch(err => {
+                console.log(err);
+            })
+    }
+
+    async saveProjectIssue(projectId, issue) {
+        this.defineHeaders();
+        return axios
+            .post(`${this.baseUrl}/projects/${projectId}/issues`, issue)
+            .then(response => response.data)
+            .catch(err => console.log(err));
 
     }
 }

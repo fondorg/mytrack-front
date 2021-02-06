@@ -37,7 +37,7 @@
 
     async function saveInstance(project) {
         let saved = await saveFunc(project);
-        push(`#/${redirect}`)
+        push(redirect)
     }
 </script>
 

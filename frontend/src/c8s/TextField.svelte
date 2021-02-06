@@ -10,7 +10,6 @@
 
     onMount(() => {
         if (autofocus) {
-            //console.log(input)
             setTimeout(() => {
                 input.focus();
             }, 0)

@@ -8,7 +8,6 @@ import org.keycloak.adapters.springboot.KeycloakSpringBootProperties;
 import org.keycloak.adapters.springsecurity.KeycloakConfiguration;
 import org.keycloak.adapters.springsecurity.authentication.KeycloakAuthenticationProvider;
 import org.keycloak.adapters.springsecurity.client.KeycloakClientRequestFactory;
-import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
 import org.keycloak.adapters.springsecurity.config.KeycloakWebSecurityConfigurerAdapter;
 import org.keycloak.adapters.springsecurity.token.KeycloakAuthenticationToken;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +24,7 @@ import org.springframework.security.web.authentication.session.RegisterSessionAu
 import org.springframework.security.web.authentication.session.SessionAuthenticationStrategy;
 import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.context.request.ServletRequestAttributes;
+import ru.fondorg.mytrackfront.restclient.ApiRestTemplate;
 
 import java.security.Principal;
 
@@ -89,8 +89,8 @@ class KeycloakConfig extends KeycloakWebSecurityConfigurerAdapter {
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
-    public KeycloakRestTemplate keycloakRestTemplate(KeycloakClientRequestFactory requestFactory) {
-        return new KeycloakRestTemplate(requestFactory);
+    public ApiRestTemplate keycloakRestTemplate(KeycloakClientRequestFactory requestFactory) {
+        return new ApiRestTemplate(requestFactory);
     }
 
     /**

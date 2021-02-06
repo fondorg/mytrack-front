@@ -9,6 +9,8 @@
     import {wrap} from 'svelte-spa-router/wrap'
     import ProjectMembers from './ProjectMembers.svelte'
     import ProjectIssues from './ProjectIssues.svelte'
+    import IssueView from './IssueView.svelte'
+    import IssueEdit from './IssueEdit.svelte'
 
     export let params;
 
@@ -37,12 +39,24 @@
         '/issues': wrap({
             component: ProjectIssues,
             props: {projectId: params.id}
+        }),
+        '/issues/new': wrap({
+            component: IssueEdit,
+            props: {projectId: params.id}
+        }),
+        '/issues/:issueId': wrap({
+            component: IssueView,
+            props: {projectId: params.id}
+        }),
+        '/issues/:issueId/edit': wrap({
+            component: IssueEdit,
+            props: {projectId: params.id}
         })
     }
 
     onMount(async () => {
         let api = new Api();
-        project = await api.getProject(params.id);
+        project = await api.getProject(params.id) || {};
         loading = false;
     })
 
@@ -65,7 +79,7 @@
         </div>
         <div class:bg-red-200={debug}
              class="col-span-4 md:col-span-5 w-full flex justify-center items-center">
-            <div class="text-center text-lg font-bold">{project.title}</div>
+            <div class="text-center text-lg ">{project.title}</div>
         </div>
         <div class:bg-red-200={debug} class="flex justify-center md:items-start md:row-span-4">
             <NavMenu menuTitle="Project Menu" items="{projectMenu}"/>

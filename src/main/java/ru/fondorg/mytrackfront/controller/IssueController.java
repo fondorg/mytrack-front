@@ -2,14 +2,12 @@ package ru.fondorg.mytrackfront.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.keycloak.adapters.springsecurity.client.KeycloakRestTemplate;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 import ru.fondorg.mytrackfront.domain.Issue;
-import ru.fondorg.mytrackfront.util.ApiV1Paths;
-import ru.fondorg.mytrackfront.util.PageParamMapper;
+import ru.fondorg.mytrackfront.restclient.ApiRestTemplate;
 import ru.fondorg.mytrackfront.util.ApiPathBuilder;
+import ru.fondorg.mytrackfront.util.ApiV1Paths;
 
 import javax.validation.Valid;
 
@@ -21,11 +19,22 @@ public class IssueController {
     private final KeycloakRestTemplate keycloakRestTemplate;
 
     private final ApiPathBuilder pathBuilder;
+    private final ApiRestTemplate apiRestTemplate;
 
-    private final PageParamMapper pageParamMapper;
+    @PostMapping(ApiV1Paths.PROJECT_ISSUES)
+    public Issue newProjectIssue(@PathVariable Long id, @Valid @RequestBody Issue issue) {
+        return keycloakRestTemplate.postForObject(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUES), issue, Issue.class, id);
+    }
 
-    @PostMapping(ApiV1Paths.ISSUES)
-    public Issue newIssue(@Valid @RequestBody Issue issue) {
-        return keycloakRestTemplate.postForObject(pathBuilder.getUrl(ApiV1Paths.ISSUES), issue, Issue.class);
+    @GetMapping(ApiV1Paths.PROJECT_ISSUES)
+    public Page<Issue> getProjectIssues(@PathVariable String id,
+                                        @RequestParam(required = false) Integer page,
+                                        @RequestParam(required = false) Integer size) {
+        return apiRestTemplate.exchangeAsPage(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUES, ApiV1Paths.PAGE_PARAMS), id, page, size);
+    }
+
+    @GetMapping(ApiV1Paths.PROJECT_ISSUE)
+    public Issue getProjectIssue(@PathVariable Long projectId, @PathVariable Long issueId) {
+        return apiRestTemplate.getForObject(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUE), Issue.class, projectId, issueId);
     }
 }

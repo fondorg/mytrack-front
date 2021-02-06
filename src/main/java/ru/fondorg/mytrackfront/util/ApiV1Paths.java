@@ -10,6 +10,7 @@ public final class ApiV1Paths {
     public static final String PROJECTS = "/api/v1/projects";
     public static final String PROJECT = "/api/v1/projects/{id}";
     public static final String PROJECT_ISSUES = "/api/v1/projects/{id}/issues";
+    public static final String PROJECT_ISSUE = "/api/v1/projects/{projectId}/issues/{issueId}";
 
 
     public static final String ISSUES = "/api/v1/issues";
