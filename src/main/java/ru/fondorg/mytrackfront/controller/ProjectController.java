@@ -13,7 +13,7 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:5000", "http://localhost:8080"})
+@CrossOrigin(origins = {"http://localhost:5000", "http://localhost:8080", "http://192.168.0.108:8080"})
 //@RequestMapping(ApiV1Paths.PROJECTS_API)
 @RequiredArgsConstructor
 public class ProjectController {
