@@ -7,8 +7,6 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "mytrack")
 public class MyTrackProperties {
 
-    private String mytrackSrvBaseUrl;
-
     private String apiHost;
 
     private Integer apiPort;

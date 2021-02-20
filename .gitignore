@@ -228,3 +228,4 @@ fabric.properties
 
 # local spring configs
 /config
+/kube-configs/**

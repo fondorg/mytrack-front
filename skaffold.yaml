@@ -1,0 +1,14 @@
+apiVersion: skaffold/v2beta6
+kind: Config
+metadata:
+  name: mytrack-front
+build:
+  artifacts:
+  - image: fondorg/mytrack-front
+    context: .
+    jib: {}
+deploy:
+  kubectl:
+    manifests:
+      - kubernetes-manifests/mytrack-front-deployment.yaml
+      - kubernetes-manifests/mytrack-front-service.yaml

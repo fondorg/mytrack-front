@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mytrack-front
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mytrack-front
+  template:
+    metadata:
+      labels:
+        app: mytrack-front
+    spec:
+      containers:
+      - name: mytrack-front
+        image: fondorg/mytrack-front
+        ports:
+        - containerPort: 8080
+        env:
+        - name: PORT
+          value: "8080"
+        - name: JAVA_TOOL_OPTIONS
+          value: -agentlib:jdwp=transport=dt_socket,server=y,address=5005,suspend=n,quiet=y
+        - name: KEYCLOAK_RESOURCE
+          valueFrom:
+            secretKeyRef:
+              name: mytrack-front-secret
+              key: keycloak.resource
+        - name: KEYCLOAK_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: mytrack-front-secret
+              key: keycloak.credentials.secret
+        volumeMounts:
+          - mountPath: /home/gradle/config
+            name: mytrack-front-config
+      volumes:
+        - name: mytrack-front-config
+          configMap:
+            name: mytrack-front-config-file
+
