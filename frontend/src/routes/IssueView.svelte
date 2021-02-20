@@ -3,6 +3,7 @@
     import CenteredFlex from '../c8s/CenteredFlex.svelte'
     import Api from '../service/api-service';
     import LinkButton from '../c8s/LinkButton.svelte'
+    import marked from 'marked'
 
     export let params;
     export let projectId;
@@ -14,6 +15,16 @@
     })
 </script>
 
+<style>
+    h1 {
+        font-size: 30px;
+    }
+
+    a {
+        color: blue;
+    }
+</style>
+
 {#if issue}
     <CenteredFlex>
         <div class="font-bold">issue #{issue.id}</div>
@@ -24,6 +35,6 @@
             </div>
         </div>
         <div class="w-full">author: {issue.author.firstName} {issue.author.lastName}</div>
-        <div class="w-full p-3 text-sm text-justify whitespace-pre-wrap">{issue.description}</div>
+        <div class="w-full p-3 text-sm text-justify whitespace-pre-wrap">{@html marked(issue.description)}</div>
     </CenteredFlex>
 {/if}

@@ -20,7 +20,8 @@
     "svelte": "^3.0.0",
     "svelte-preprocess": "^4.5.2",
     "svelte-spa-router": "^3.0.5",
-    "tailwindcss": "^1.9.6"
+    "tailwindcss": "^1.9.6",
+    "marked": "^2.0.0"
   },
   "dependencies": {
     "axios": "^0.21.0",

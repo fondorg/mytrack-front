@@ -45,7 +45,7 @@
 
 </script>
 
-<div class="grid relative" on:keydown={onKeyDown}>
+<div class="grid relative w-full" on:keydown={onKeyDown}>
     <BusyScreen loading="{submitting}"/>
     {#each Object.entries(fields) as [key, val] (key)}
         {#if val.type === 'text'}
