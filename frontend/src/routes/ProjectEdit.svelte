@@ -1,4 +1,7 @@
 <script>
+    /**
+     todo: refactor with InstanceEdit component
+     */
     import Layout from '../c8s/Layout.svelte'
     import CenteredFlex from '../c8s/CenteredFlex.svelte'
     import Form from '../c8s/Form.svelte'

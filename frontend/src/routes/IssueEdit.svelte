@@ -6,7 +6,13 @@
     export let params = {}
     export let projectId;
     let api = new Api();
-    let redirect = `#/projects/${projectId}/issues`
+    let redirect = () => {
+        if (params.issueId !== undefined) {
+            return `#/projects/${projectId}/issues/${params.issueId}`
+        } else {
+            return `#/projects/${projectId}/issues`
+        }
+    }
 
     let issue = {
         title: undefined,

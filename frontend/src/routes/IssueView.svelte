@@ -13,15 +13,35 @@
     onMount(async () => {
         issue = await api.getProjectIssue(projectId, params.issueId);
     })
+
+    function delayedMarkdown() {
+
+    }
 </script>
 
 <style>
-    h1 {
-        font-size: 30px;
+    #desc-container :global(h1) {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+    #desc-container :global(h2) {
+        font-size: 1.5rem;
+        font-weight: bold;
     }
 
-    a {
+    #desc-container :global(h3) {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    #desc-container :global(h4) {
+        font-size: 0.75rem;
+        font-weight: bold;
+    }
+
+    #desc-container :global(a) {
         color: blue;
+        text-decoration: underline;
     }
 </style>
 
@@ -34,7 +54,8 @@
                 <LinkButton small="true" name="Edit" href="#/projects/{projectId}/issues/{params.issueId}/edit"/>
             </div>
         </div>
-        <div class="w-full">author: {issue.author.firstName} {issue.author.lastName}</div>
-        <div class="w-full p-3 text-sm text-justify whitespace-pre-wrap">{@html marked(issue.description)}</div>
+        <div class="w-full text-sm">author: {issue.author.firstName} {issue.author.lastName}</div>
+        <div id="desc-container"
+             class="w-full p-3 text-sm text-justify whitespace-pre-wrap">{@html marked(issue.description)}</div>
     </CenteredFlex>
 {/if}

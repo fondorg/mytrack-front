@@ -17,7 +17,7 @@
     export let constraints; //fields validation constraints
     export let readFunc; //instance async read function. will be called on mount. The function must return a data object
     export let saveFunc; //instance async create and update function. will be called on mount. Takes modified object as an argument
-    export let redirect; //redirect uri after object is saved
+    export let redirect; //function that returns redirect uri after object is saved
 
     let loading = true;
 
@@ -31,7 +31,7 @@
 
     async function saveInstance(project) {
         let saved = await saveFunc(project);
-        push(redirect)
+        push(redirect())
     }
 </script>
 
