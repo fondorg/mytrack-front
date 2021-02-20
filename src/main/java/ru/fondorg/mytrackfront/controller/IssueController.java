@@ -37,4 +37,10 @@ public class IssueController {
     public Issue getProjectIssue(@PathVariable Long projectId, @PathVariable Long issueId) {
         return apiRestTemplate.getForObject(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUE), Issue.class, projectId, issueId);
     }
+
+
+    @DeleteMapping(ApiV1Paths.PROJECT_ISSUE)
+    public void deleteProjectIssue(@PathVariable Long projectId, @PathVariable Long issueId) {
+        apiRestTemplate.delete(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUE), projectId, issueId);
+    }
 }

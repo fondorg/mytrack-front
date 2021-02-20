@@ -229,3 +229,4 @@ fabric.properties
 # local spring configs
 /config
 /kube-configs/**
+!/kube-configs/.gitkeep

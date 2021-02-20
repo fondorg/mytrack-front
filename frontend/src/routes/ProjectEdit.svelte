@@ -26,7 +26,7 @@
             autofocus: true
         },
         description: {
-            type: 'text',
+            type: 'textarea',
             label: 'Description'
         }
     }
@@ -57,7 +57,7 @@
 </script>
 
 <Layout>
-    <CenteredFlex extraClasses="relative">
+    <CenteredFlex extraClasses="relative px-2">
         <BusyScreen loading="{loading}"/>
         <h1 class="text-xl mb-4">{params.id ? 'New project' : `Edit project: ${name}`}</h1>
         <Form dataObject="{project}" fields="{fields}" onSubmit={saveProject} constraints="{constraints}"/>

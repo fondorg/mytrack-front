@@ -1,6 +1,7 @@
 #!/usr/bin/env sh
 SCRIPT_PATH="$( cd "$(dirname "$0")" >/dev/null 2>&1 || exit ; pwd -P )"
 CONF_PATH="kube-configs/dev-secret.yaml"
+mkdir -p $SCRIPT_PATH/../kube-configs
 
 if [ -e "$SCRIPT_PATH/../$CONF_PATH" ]; then
   echo "$CONF_PATH already exists. exiting..."

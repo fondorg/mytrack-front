@@ -6,17 +6,20 @@
     export let params = {}
     export let projectId;
     let api = new Api();
-    let redirect = () => {
-        if (params.issueId !== undefined) {
-            return `#/projects/${projectId}/issues/${params.issueId}`
-        } else {
-            return `#/projects/${projectId}/issues`
+    let redirect = (issue, deleted) => {
+        if (deleted) {
+            return `#/projects/${projectId}/issues/`
         }
+        if (issue !== undefined) {
+            return `#/projects/${projectId}/issues/${issue.id}`
+        }
+        //todo: error handling
     }
 
     let issue = {
         title: undefined,
-        description: ''
+        description: '',
+        closed: false
     }
 
     let fields = {
@@ -40,7 +43,7 @@
     };
 
     onMount(() => {
-        console.log(params);
+        // console.log(params);
     })
 
     async function getIssue() {
@@ -51,7 +54,11 @@
         return await api.saveProjectIssue(projectId, issue);
     }
 
+    async function deleteIssue(issue) {
+        return await api.deleteProjectIssue(projectId, issue.id);
+    }
+
 </script>
 
 <InstanceEdit dataObject="{issue}" isNew="{params.issueId === undefined}" name="Issue" {fields} {constraints}
-              {redirect} readFunc="{getIssue}" saveFunc="{saveIssue}"/>
+              {redirect} readFunc="{getIssue}" saveFunc="{saveIssue}" deleteFunc="{deleteIssue}"/>

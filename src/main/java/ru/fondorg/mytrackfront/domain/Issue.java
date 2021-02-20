@@ -15,4 +15,6 @@ public class Issue {
     private User author;
 
     private Long projectId;
+
+    private Boolean closed;
 }
