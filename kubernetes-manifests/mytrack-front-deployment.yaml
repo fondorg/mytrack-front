@@ -33,7 +33,7 @@ spec:
               name: mytrack-front-secret
               key: keycloak.credentials.secret
         volumeMounts:
-          - mountPath: /home/gradle/config
+          - mountPath: /config
             name: mytrack-front-config
       volumes:
         - name: mytrack-front-config
