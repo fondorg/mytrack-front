@@ -51,4 +51,7 @@ jib {
 	from {
 		image 'openjdk:11.0-jre'
 	}
+	to {
+		image 'fondorg/mytrack-front'
+	}
 }
