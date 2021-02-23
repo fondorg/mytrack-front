@@ -79,6 +79,7 @@ export default {
             targets: [
                 {src: 'public/*', dest: '../src/main/resources/static/'}
             ],
+            verbose: true,
             hook: 'writeBundle'
         }),
 

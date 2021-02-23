@@ -230,3 +230,4 @@ fabric.properties
 /config
 /kube-configs/**
 !/kube-configs/.gitkeep
+/src/main/resources/static/**
