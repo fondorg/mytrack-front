@@ -15,7 +15,9 @@ jobs:
         with:
             node-version: '13'
       - run: npm install
+        working-directory: frontend
       - run: npm build
+        working-directory: frontend
         env:
           OIDC_ISSUER: ${{ secrets.OIDC_ISSUER }}
           OIDC_CLIENT_ID: ${{ secrets.OIDC_CLIENT_ID }}
