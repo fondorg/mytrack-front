@@ -21,5 +21,6 @@
 <Layout>
     <CenteredFlex>
         <div class="mt-10">Home component</div>
+        <div class="mt-10">Check out your <a class="underline" href="#/projects">Projects</a></div>
     </CenteredFlex>
 </Layout>

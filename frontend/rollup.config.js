@@ -4,6 +4,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import {terser} from 'rollup-plugin-terser';
 import replace from '@rollup/plugin-replace';
+import copy from 'rollup-plugin-copy'
 import sveltePreprocess from 'svelte-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
@@ -73,6 +74,13 @@ export default {
             dedupe: ['svelte']
         }),
         commonjs(),
+
+        copy({
+            targets: [
+                {src: 'public/*', dest: '../src/main/resources/static/'}
+            ],
+            hook: 'writeBundle'
+        }),
 
         // In dev mode, call `npm run start` once
         // the bundle has been generated
