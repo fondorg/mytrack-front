@@ -12,17 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2
-      with:
-        node-version: '13'
-          - run: npm install
-          - run: npm build
-            env:
-              OIDC_ISSUER: ${{ secrets.OIDC_ISSUER }}
-              OIDC_CLIENT_ID: ${{ secrets.OIDC_CLIENT_ID }}
-              OIDC_REDIRECT_URL: ${{ secrets.OIDC_REDIRECT_URL }}
-              OIDC_LOGOUT_REDIRECT_URL: ${{ secrets.OIDC_LOGOUT_REDIRECT_URL }}
-              API_BASE_URL: ${{ secrets.API_BASE_URL }}
-              NODE_ENV: production
+        with:
+            node-version: '13'
+      - run: npm install
+      - run: npm build
+        env:
+          OIDC_ISSUER: ${{ secrets.OIDC_ISSUER }}
+          OIDC_CLIENT_ID: ${{ secrets.OIDC_CLIENT_ID }}
+          OIDC_REDIRECT_URL: ${{ secrets.OIDC_REDIRECT_URL }}
+          OIDC_LOGOUT_REDIRECT_URL: ${{ secrets.OIDC_LOGOUT_REDIRECT_URL }}
+          API_BASE_URL: ${{ secrets.API_BASE_URL }}
+          NODE_ENV: production
 
   build:
     needs: [ spa-build ]
