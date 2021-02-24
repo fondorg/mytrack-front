@@ -39,10 +39,10 @@ export default class Api {
     }
 
 
-    async getProjectIssues(projectId) {
+    async getProjectIssues(projectId, page = 1, size = 20) {
         this.defineHeaders();
         return axios
-            .get(`${this.baseUrl}/projects/${projectId}/issues`)
+            .get(`${this.baseUrl}/projects/${projectId}/issues?page=${page}&size=${size}`)
             .then(response => response.data)
             .catch(err => console.log(err));
     }
@@ -70,7 +70,8 @@ export default class Api {
         this.defineHeaders();
         return axios
             .delete(`${this.baseUrl}/projects/${projectId}/issues/${issueId}`)
-            .then(response => {})
+            .then(response => {
+            })
             .catch(err => console.log(err))
     }
 }

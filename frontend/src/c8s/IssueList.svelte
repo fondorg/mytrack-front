@@ -4,12 +4,13 @@
     import IssueCard from './IssueCard.svelte'
 
     export let projectId;
-    let issues = [];
+    export let issues = [];
 
     onMount(async () => {
-        const api = new Api();
-        issues = await api.getProjectIssues(projectId) || [];
-        console.log(issues)
+        // const api = new Api();
+        // issues = await api.getProjectIssues(projectId, page, 5) || [];
+        // console.log(issues)
+        // console.log(page)
     })
 </script>
 

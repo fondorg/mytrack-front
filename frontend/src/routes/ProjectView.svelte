@@ -21,6 +21,11 @@
             icon: '/img/document.svg'
         },
         {
+            link: `/projects/${params.id}/issues/new`,
+            title: 'New Issue',
+            icon: '/img/document-add.svg'
+        },
+        {
             link: `/projects/${params.id}/members`,
             title: 'Members',
             icon: '/img/user-groups.svg'
@@ -29,7 +34,7 @@
             link: `/project-edit/${params.id}`,
             title: 'Edit project'
         }
-    ]
+    ];
 
     let project = {};
     let loading = true;
@@ -48,6 +53,10 @@
             }),
             '/issues/new': wrap({
                 component: IssueEdit,
+                props: {projectId: params.id}
+            }),
+            '/issues?page=:page': wrap({
+                component: ProjectIssues,
                 props: {projectId: params.id}
             }),
             '/issues/:issueId': wrap({
