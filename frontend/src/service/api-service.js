@@ -20,10 +20,10 @@ export default class Api {
             })
     }
 
-    async getProjects() {
+    async getProjects(page = 1, size = 20) {
         this.defineHeaders();
         return axios
-            .get(`${this.baseUrl}/projects`)
+            .get(`${this.baseUrl}/projects?page=${page}&size=${size}`)
             .then(response => response.data)
             .catch(err => {
                 console.log(err);

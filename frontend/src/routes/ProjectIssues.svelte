@@ -11,18 +11,17 @@
     export let projectId;
     let issues = [];
     const api = new Api();
-    let page;
+    $: queryParams = parse($querystring)
+    $: {
+        onPageChange(queryParams.page !== undefined ? queryParams.page : 1)
+    }
 
     onMount(async () => {
-        page = parse($querystring).page || 1
-        await onPageChange(page)
+        await onPageChange()
     })
 
-    async function onPageChange(newPage) {
-        page = newPage
-        console.log("new page: " + newPage)
-        issues = await api.getProjectIssues(projectId, page, 5) || [];
-        console.log(issues)
+    async function onPageChange() {
+        issues = await api.getProjectIssues(projectId, queryParams.page, 5) || [];
     }
 
 </script>
@@ -32,5 +31,5 @@
         <LinkButton name="New Issue" href="#/projects/{projectId}/issues/new" defaultAction="true"/>
     </div>
     <IssueList {issues} projectId="{projectId}"/>
-    <Pagination totalPages="{issues.totalPages}" currentPage="{page}" url="#/projects/{projectId}/issues?" navFunction="{onPageChange}"/>
+    <Pagination totalPages="{issues.totalPages}" currentPage="{queryParams.page || 1}" url="#/projects/{projectId}/issues?"/>
 </CenteredFlex>

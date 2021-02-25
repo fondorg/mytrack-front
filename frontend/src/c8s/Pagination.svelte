@@ -2,12 +2,10 @@
     import './CenteredFlex.svelte'
     import CenteredFlex from "./CenteredFlex.svelte";
     import {afterUpdate} from 'svelte'
-    import {push} from 'svelte-spa-router'
 
     export let totalPages;
     export let currentPage;
     export let url;
-    export let navFunction;
 
     let pages = [];
 
@@ -42,22 +40,17 @@
         }
         pages = pages;
     })
-    function navigate(newPage) {
-        push(`${url}page=${newPage}`)
-        navFunction(newPage)
-    }
 </script>
 
 <CenteredFlex>
     {#if totalPages > 1}
         <div class="flex flex-wrap">
-<!--            <a href="{url + `page=${currentPage > 1 ? currentPage - 1 : '1'}`}"-->
-            <a on:click="{navigate(currentPage > 1 ? currentPage - 1 : '1')}"
+            <a href="{url + `page=${currentPage > 1 ? currentPage - 1 : '1'}`}"
                class="px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 rounded border" rel="prev">«</a>
             {#each pages as p, i}
                 {#if !p.dots}
                     <a href="{url + `page=${p.p}`}" class="px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 rounded border"
-                       class:bg-gray-400="{parseInt(currentPage) === p.p}">{p.p}</a>
+                       class:bg-green-200="{parseInt(currentPage) === p.p}">{p.p}</a>
                 {:else}
                     <div class="h-full align-bottom px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 text-lg">...</div>
                 {/if}

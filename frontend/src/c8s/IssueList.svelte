@@ -1,17 +1,9 @@
 <script>
-    import {onMount} from 'svelte';
-    import Api from "../service/api-service";
     import IssueCard from './IssueCard.svelte'
 
     export let projectId;
     export let issues = [];
 
-    onMount(async () => {
-        // const api = new Api();
-        // issues = await api.getProjectIssues(projectId, page, 5) || [];
-        // console.log(issues)
-        // console.log(page)
-    })
 </script>
 
 {#if issues.content && issues.content.length === 0}

@@ -1,6 +1,7 @@
 package ru.fondorg.mytrackfront.controller;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 import ru.fondorg.mytrackfront.domain.Project;
 import ru.fondorg.mytrackfront.domain.ProjectProjection;
@@ -10,7 +11,6 @@ import ru.fondorg.mytrackfront.util.ApiV1Paths;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
-import java.util.List;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:5000", "http://localhost:8080", "http://192.168.0.108:8080"})
@@ -27,8 +27,10 @@ public class ProjectController {
     }
 
     @GetMapping(ApiV1Paths.PROJECTS)
-    public List<ProjectProjection> getAllProjects() {
-        return apiRestTemplate.exchangeAsList(pathBuilder.getUrl(ApiV1Paths.PROJECTS));
+    public Page<ProjectProjection> getAllProjects(
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size) {
+        return apiRestTemplate.exchangeAsPage(pathBuilder.getUrl(ApiV1Paths.PROJECTS, ApiV1Paths.PAGE_PARAMS), page, size);
     }
 
     @GetMapping(ApiV1Paths.PROJECT)

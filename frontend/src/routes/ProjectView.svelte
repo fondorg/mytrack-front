@@ -55,10 +55,6 @@
                 component: IssueEdit,
                 props: {projectId: params.id}
             }),
-            '/issues?page=:page': wrap({
-                component: ProjectIssues,
-                props: {projectId: params.id}
-            }),
             '/issues/:issueId': wrap({
                 component: IssueView,
                 props: {projectId: params.id}
