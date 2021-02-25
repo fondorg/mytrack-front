@@ -1,8 +1,15 @@
 <script>
     import {logout, login, isAuthenticated, userInfo} from './OidcContext.svelte'
+    import {push} from 'svelte-spa-router'
     import LinkButton from './LinkButton.svelte'
+    import Button from "./Button.svelte";
 
     let menuHide = true;
+
+    async function doLogout() {
+        await logout()
+        push("/")
+    }
 </script>
 
 <nav class="flex items-center justify-between flex-wrap p-6  border-b-2 lg:border-0">
@@ -45,7 +52,7 @@
                     </svg>
                     <span>{$userInfo.preferred_username}</span>
                 </a>
-                <LinkButton name="Logout" href="/" on:click={()=>logout()}/>
+                <Button name="Logout" on:click={doLogout}/>
             {/if}
         </div>
     </div>
