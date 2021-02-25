@@ -46,7 +46,7 @@
         <div class="px-2 py-2  text-lg border-b-2 border-gray-400">{menuTitle}</div>
         <div class="text-sm md:flex flex-col w-full">
             {#each items as item}
-                <a href="{item.link}" class="flex p-2 items-center" use:link
+                <a use:link={item.link}  class="flex p-2 items-center"
                    use:active={{path: item.link, className: 'border-l-4 border-gray-500 bg-gray-100'}}>
                     {#if item.icon}
                         <img src="{item.icon}" class="w-4 mr-2" alt="">

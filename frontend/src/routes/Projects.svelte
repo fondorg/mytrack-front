@@ -3,15 +3,33 @@
     import CenteredFlex from '../c8s/CenteredFlex.svelte'
     import {onMount} from 'svelte'
     import Api from "../service/api-service";
-    import ProjectCard from '../c8s/ProjectCard.svelte'
-    import OidcContext, {isLoading} from '../c8s/OidcContext.svelte'
     import ProjectList from "../c8s/ProjectList.svelte";
+    import {parse} from "qs";
+    import {querystring} from "svelte-spa-router";
+    import Pagination from "../c8s/Pagination.svelte";
 
+
+    let projects = [];
+    const api = new Api();
+    $: queryParams = parse($querystring)
+    $: {
+        onPageChange(queryParams.page !== undefined ? queryParams.page : 1)
+    }
+
+    onMount(async () => {
+        await onPageChange()
+    })
+
+    async function onPageChange() {
+        projects = await api.getProjects(queryParams.page, 5) || [];
+        console.log(projects)
+    }
 
 </script>
 <Layout>
     <CenteredFlex extraClasses="px-2">
-        <ProjectList/>
+        <ProjectList {projects}/>
+        <Pagination totalPages="{projects.totalPages}" currentPage="{queryParams.page || 1}" url="#/projects?"/>
     </CenteredFlex>
 </Layout>
 

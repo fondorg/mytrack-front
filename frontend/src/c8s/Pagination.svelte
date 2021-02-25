@@ -45,18 +45,18 @@
 <CenteredFlex>
     {#if totalPages > 1}
         <div class="flex flex-wrap">
-            <a href="{url + `p=${currentPage > 1 ? currentPage - 1 : '1'}`}"
+            <a href="{url + `page=${currentPage > 1 ? currentPage - 1 : '1'}`}"
                class="px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 rounded border" rel="prev">«</a>
             {#each pages as p, i}
                 {#if !p.dots}
-                    <a href="{url + `p=${p.p}`}" class="px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 rounded border"
-                       class:bg-gray-400="{parseInt(currentPage) === p.p}">{p.p}</a>
+                    <a href="{url + `page=${p.p}`}" class="px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 rounded border"
+                       class:bg-green-200="{parseInt(currentPage) === p.p}">{p.p}</a>
                 {:else}
                     <div class="h-full align-bottom px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 text-lg">...</div>
                 {/if}
             {/each}
             <!--<div class="h-full align-bottom px-4 py-1 md:py-2 m-1 md:m-2 text-lg">...</div>-->
-            <a href="{url + `p=${currentPage < totalPages ? parseInt(currentPage) + 1 : totalPages}`}"
+            <a href="{url + `page=${currentPage < totalPages ? parseInt(currentPage) + 1 : totalPages}`}"
                class="px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 rounded border" rel="next">»</a>
         </div>
     {/if}

@@ -3,13 +3,26 @@
     import IssueList from '../c8s/IssueList.svelte'
     import LinkButton from "../c8s/LinkButton.svelte";
     import {onMount} from 'svelte'
+    import {querystring} from 'svelte-spa-router'
+    import {parse} from 'qs'
+    import Api from "../service/api-service";
+    import Pagination from '../c8s/Pagination.svelte'
 
     export let projectId;
-    export let params;
+    let issues = [];
+    const api = new Api();
+    $: queryParams = parse($querystring)
+    $: {
+        onPageChange(queryParams.page !== undefined ? queryParams.page : 1)
+    }
 
-    onMount(() => {
-        console.log(params)
+    onMount(async () => {
+        await onPageChange()
     })
+
+    async function onPageChange() {
+        issues = await api.getProjectIssues(projectId, queryParams.page, 5) || [];
+    }
 
 </script>
 
@@ -17,5 +30,6 @@
     <div class="mb-4">
         <LinkButton name="New Issue" href="#/projects/{projectId}/issues/new" defaultAction="true"/>
     </div>
-    <IssueList projectId="{projectId}"/>
+    <IssueList {issues} projectId="{projectId}"/>
+    <Pagination totalPages="{issues.totalPages}" currentPage="{queryParams.page || 1}" url="#/projects/{projectId}/issues?"/>
 </CenteredFlex>

@@ -63,14 +63,19 @@
             <Checkbox label="{val.label}" bind:value={dataObject[key]} bind:errorMsg={validations[key]}/>
         {:else if val.type === 'textarea'}
             <TextAreaField label="{val.label}" bind:value={dataObject[key]} bind:errorMsg={validations[key]}
-            autofocus="{val.autofocus || false}"/>
+                           autofocus="{val.autofocus || false}"/>
         {/if}
     {/each}
     <div class="mt-4 grid grid-cols-4 md:grid-cols-4 gap-4" id="form-action-bar">
         <Button on:click={doSubmit} name="Save" defaultAction="true" disabled='{!formIsValid}'/>
         <div></div>
-        <ColorButton on:click={doDelete} name="Delete" textColor="text-white" bgColor="bg-red-700" pressedBackground="bg-red-900"
-        extraStyle="px-0"/>
+        {#if onDelete}
+            <ColorButton on:click={doDelete} name="Delete" textColor="text-white" bgColor="bg-red-700"
+                         pressedBackground="bg-red-900"
+                         extraStyle="px-0"/>
+        {:else}
+            <div></div>
+        {/if}
         <Button name="Cancel" on:click={onCancel}/>
     </div>
 </div>

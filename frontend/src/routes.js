@@ -1,6 +1,5 @@
 import Tasks from './routes/Tasks.svelte'
 import Projects from './routes/Projects.svelte'
-import Bar from './routes/Bar.svelte'
 import Home from './routes/Home.svelte';
 import Workspace from './routes/Workspace.svelte'
 import Login from './routes/Login.svelte'
@@ -63,10 +62,6 @@ let authRoutes = {
     }),
     '/projects/:id/issue-edit/:id': wrap({
         component: IssueEdit,
-        conditions: authConditions
-    }),
-    '/bar': wrap({
-        component: Bar,
         conditions: authConditions
     }),
     '/workspace': wrap({
