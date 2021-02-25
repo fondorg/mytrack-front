@@ -1,7 +1,6 @@
 <script>
     import Layout from '../c8s/Layout.svelte'
     import CenteredFlex from '../c8s/CenteredFlex.svelte'
-    import {onMount} from 'svelte'
     import Api from "../service/api-service";
     import ProjectList from "../c8s/ProjectList.svelte";
     import {parse} from "qs";
@@ -15,10 +14,6 @@
     $: {
         onPageChange(queryParams.page !== undefined ? queryParams.page : 1)
     }
-
-    onMount(async () => {
-        await onPageChange()
-    })
 
     async function onPageChange() {
         projects = await api.getProjects(queryParams.page, 5) || [];

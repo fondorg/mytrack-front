@@ -2,7 +2,6 @@
     import CenteredFlex from '../c8s/CenteredFlex.svelte'
     import IssueList from '../c8s/IssueList.svelte'
     import LinkButton from "../c8s/LinkButton.svelte";
-    import {onMount} from 'svelte'
     import {querystring} from 'svelte-spa-router'
     import {parse} from 'qs'
     import Api from "../service/api-service";
@@ -15,10 +14,6 @@
     $: {
         onPageChange(queryParams.page !== undefined ? queryParams.page : 1)
     }
-
-    onMount(async () => {
-        await onPageChange()
-    })
 
     async function onPageChange() {
         issues = await api.getProjectIssues(projectId, queryParams.page, 5) || [];
