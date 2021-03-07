@@ -53,13 +53,18 @@
     async function saveProject(project) {
         let saved = await api.saveProject(project);
         push("#/projects")
-    params.id}
+    }
+
+    async function deleteProject(project) {
+        await api.deleteProject(project.id)
+        await push("#/projects")
+    }
 </script>
 
 <Layout>
     <CenteredFlex extraClasses="relative px-2">
         <BusyScreen loading="{loading}"/>
         <h1 class="text-xl mb-4">{params.id ? 'New project' : `Edit project: ${name}`}</h1>
-        <Form dataObject="{project}" fields="{fields}" onSubmit={saveProject} constraints="{constraints}"/>
+        <Form dataObject="{project}" fields="{fields}" onSubmit={saveProject} constraints="{constraints}" onDelete="{deleteProject}"/>
     </CenteredFlex>
 </Layout>
