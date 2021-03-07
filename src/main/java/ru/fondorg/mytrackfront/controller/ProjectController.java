@@ -43,4 +43,9 @@ public class ProjectController {
         return apiRestTemplate.postForObject(pathBuilder.getUrl(ApiV1Paths.PROJECTS), project, Project.class);
     }
 
+    @DeleteMapping(ApiV1Paths.PROJECT)
+    public void deleteProject(@PathVariable Long id) {
+        apiRestTemplate.delete(pathBuilder.getUrl(ApiV1Paths.PROJECT), id);
+    }
+
 }

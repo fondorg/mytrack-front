@@ -38,6 +38,14 @@ export default class Api {
             .catch(err => console.log(err));
     }
 
+    async deleteProject(projectId) {
+        this.defineHeaders()
+        return axios
+            .delete(`${this.baseUrl}/projects/${projectId}`)
+            .then(response => {})
+            .catch(err => console.error(err))
+    }
+
 
     async getProjectIssues(projectId, page = 1, size = 20) {
         this.defineHeaders();
