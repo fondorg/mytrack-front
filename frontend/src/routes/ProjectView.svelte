@@ -31,6 +31,11 @@
             icon: '/img/user-groups.svg'
         },
         {
+            link: `/projects/${params.id}/tags`,
+            title: 'Tags',
+            icon: '/img/tag.svg'
+        },
+        {
             link: `/project-edit/${params.id}`,
             title: 'Edit project'
         }

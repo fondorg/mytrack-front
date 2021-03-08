@@ -42,10 +42,10 @@ export default class Api {
         this.defineHeaders()
         return axios
             .delete(`${this.baseUrl}/projects/${projectId}`)
-            .then(response => {})
+            .then(response => {
+            })
             .catch(err => console.error(err))
     }
-
 
     async getProjectIssues(projectId, page = 1, size = 20) {
         this.defineHeaders();
@@ -81,5 +81,60 @@ export default class Api {
             .then(response => {
             })
             .catch(err => console.log(err))
+    }
+
+    async saveProjectTag(projectId, tag) {
+        this.defineHeaders()
+        return axios.post(`${this.baseUrl}/projects/${projectId}/tags`, tag)
+            .then(resp => resp.data)
+            .catch(err => console.error(err))
+    }
+
+    async saveCommonTag(tag) {
+        this.defineHeaders()
+        return axios.post(`${this.baseUrl}/tags`, tag)
+            .then(resp => resp.data)
+            .catch(err => console.error(err))
+    }
+
+    async getProjectTags(projectId) {
+        this.defineHeaders()
+        return axios.get(`${this.baseUrl}/projects/${projectId}/tags`)
+            .then(resp => resp.data)
+            .catch(err => console.error(err))
+    }
+
+    async getCommonTags() {
+        this.defineHeaders()
+        return axios.get(`${this.baseUrl}/tags`)
+            .then(resp => resp.data)
+            .catch(err => console.error(err))
+    }
+
+    async getProjectTag(projectId, tagId) {
+        this.defineHeaders()
+        return axios.get(`${this.baseUrl}/projects/${projectId}/tags/${tagId}`)
+            .then(resp => resp.data)
+            .catch(err => console.error(err))
+    }
+    async getCommonTag(tagId) {
+        this.defineHeaders()
+        return axios.get(`${this.baseUrl}/tags/${tagId}`)
+            .then(resp => resp.data)
+            .catch(err => console.error(err))
+    }
+
+    async deleteProjectTag(projectId, tagId) {
+        this.defineHeaders()
+        return axios.delete(`${this.baseUrl}/projects/${projectId}/tags/${tagId}`)
+            .then(resp => {})
+            .catch(err => console.error(err))
+    }
+
+    async deleteCommonTag(tagId) {
+        this.defineHeaders()
+        return axios.delete(`${this.baseUrl}/tags/${tagId}`)
+            .then(resp => {})
+            .catch(err => console.error(err))
     }
 }
