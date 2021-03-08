@@ -40,13 +40,23 @@ public class TagController {
         return apiRestTemplate.exchangeAsPage(pathBuilder.getUrl(ApiV1Paths.PROJECT_TAGS, ApiV1Paths.PAGE_PARAMS), projectId, page, size);
     }
 
+    @GetMapping(ApiV1Paths.PROJECT_TAG)
+    public Tag getProjectTag(@PathVariable Long projectId, @PathVariable Long tagId) {
+        return apiRestTemplate.getForObject(pathBuilder.getUrl(ApiV1Paths.PROJECT_TAG), Tag.class, projectId, tagId);
+    }
+
+    @GetMapping(ApiV1Paths.TAG)
+    public Tag getCommonTag(@PathVariable Long tagId) {
+        return apiRestTemplate.getForObject(pathBuilder.getUrl(ApiV1Paths.TAG), Tag.class, tagId);
+    }
+
     @DeleteMapping(ApiV1Paths.PROJECT_TAG)
     public void deleteProjectTag(@PathVariable Long projectId, @PathVariable Long tagId) {
         apiRestTemplate.delete(pathBuilder.getUrl(ApiV1Paths.PROJECT_TAG), projectId, tagId);
     }
 
     @DeleteMapping(ApiV1Paths.TAG)
-    public void deleteCommonTaag(@PathVariable Long tagId) {
+    public void deleteCommonTag(@PathVariable Long tagId) {
         apiRestTemplate.delete(pathBuilder.getUrl(ApiV1Paths.TAG), tagId);
     }
 }

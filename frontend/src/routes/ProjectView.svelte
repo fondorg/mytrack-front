@@ -11,6 +11,9 @@
     import IssueView from './IssueView.svelte'
     import IssueEdit from './IssueEdit.svelte'
     import ProjectHome from './ProjectHome.svelte'
+    import ProjectTags from './ProjectTags.svelte'
+    import TagEdit from './TagEdit.svelte'
+    import TagView from './TagView.svelte'
 
     export let params;
 
@@ -66,6 +69,22 @@
             }),
             '/issues/:issueId/edit': wrap({
                 component: IssueEdit,
+                props: {projectId: params.id}
+            }),
+            '/tags': wrap({
+                component: ProjectTags,
+                props: {projectId: params.id}
+            }),
+            '/tags/new': wrap({
+                component: TagEdit,
+                props: {projectId: params.id}
+            }),
+            '/tags/:tagId': wrap({
+                component: TagEdit,
+                props: {projectId: params.id}
+            }),
+            '/tags/:tagId/edit': wrap({
+                component: TagEdit,
                 props: {projectId: params.id}
             })
         };

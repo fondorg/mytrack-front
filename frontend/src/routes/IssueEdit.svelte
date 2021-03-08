@@ -1,7 +1,6 @@
 <script>
     import InstanceEdit from '../c8s/InstanceEdit.svelte'
     import Api from "../service/api-service";
-    import {onMount} from 'svelte'
 
     export let params = {}
     export let projectId;
@@ -41,10 +40,6 @@
             }
         }
     };
-
-    onMount(() => {
-        // console.log(params);
-    })
 
     async function getIssue() {
         return await api.getProjectIssue(projectId, params.issueId);
