@@ -5,11 +5,12 @@
     export let textColor = ''
     export let pressedBackground = 'bg-gray-300'
     export let extraStyle = ''
-//{defaultAction ? 'active:bg-green-500 active:text-white' :'hover:bg-gray-300 hover:text-gray-600'}
+    export let small = false;
+    //{defaultAction ? 'active:bg-green-500 active:text-white' :'hover:bg-gray-300 hover:text-gray-600'}
 </script>
 
 <button {disabled} on:click
-   class="text-sm px-4 py-2 leading-none border rounded {bgColor} {textColor} active:{pressedBackground}
+        class="{small ? 'px-1 py-1 text-xs' : 'px-4 py-2 text-sm'} leading-none border rounded {bgColor} {textColor} active:{pressedBackground}
    {extraStyle}
 
    focus:outline-none
