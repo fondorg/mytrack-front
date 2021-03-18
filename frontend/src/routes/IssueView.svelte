@@ -15,7 +15,6 @@
 
     onMount(async () => {
         issue = await api.getProjectIssue(projectId, params.issueId);
-        console.log(issue)
     })
 
     async function switchCloseState() {
@@ -43,7 +42,7 @@
         <div class="divide-y divide-gray-400">
             <div id="desc-container"
                  class="w-full px-2 pt-2 md:p-3 text-sm text-justify whitespace-pre-wrap">{@html marked(issue.description)}</div>
-            <IssueTags/>
+            <IssueTags {projectId}/>
 
             <div id="issue-action">
                 <ColorButton small="true" on:click={switchCloseState}
