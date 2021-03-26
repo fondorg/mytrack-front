@@ -26,6 +26,11 @@ public class IssueController {
         return keycloakRestTemplate.postForObject(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUES), issue, Issue.class, id);
     }
 
+    @PutMapping(ApiV1Paths.PROJECT_ISSUE)
+    public void updateProjectIssue(@PathVariable Long projectId, @PathVariable Long issueId, @Valid @RequestBody Issue issue) {
+        keycloakRestTemplate.put(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUE), issue, projectId, issueId);
+    }
+
     @GetMapping(ApiV1Paths.PROJECT_ISSUES)
     public Page<Issue> getProjectIssues(@PathVariable String id,
                                         @RequestParam(required = false) Integer page,

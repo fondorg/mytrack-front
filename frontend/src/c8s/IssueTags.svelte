@@ -2,10 +2,12 @@
     import ModalWindow from './ModalWindow.svelte'
     import ColorButton from './ColorButton.svelte'
     import CenteredFlex from './CenteredFlex.svelte'
-    import ProjectTagList from './ProjectTagList.svelte'
+    import IssueTagsEdit from './IssueTagsEdit.svelte'
+    import IssueTags from "./IssueTags.svelte";
 
     export let showModal = true;
     export let projectId;
+    export let issue;
 
 </script>
 
@@ -13,7 +15,7 @@
     <ModalWindow on:closeModal={() => showModal = false} backdrop="true">
         <CenteredFlex>
             <h1 class="text-lg">Tags</h1>
-            <ProjectTagList {projectId}/>
+            <IssueTagsEdit {issue}/>
         </CenteredFlex>
     </ModalWindow>
 {/if}

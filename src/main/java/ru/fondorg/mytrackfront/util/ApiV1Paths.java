@@ -21,4 +21,5 @@ public final class ApiV1Paths {
     public static final String PROJECT_TAG = "/api/v1/projects/{projectId}/tags/{tagId}";
     public static final String TAGS = "/api/v1/tags";
     public static final String TAG = "/api/v1/tags/{tagId}";
+    public static final String ISSUE_TAGS = PROJECT_ISSUE + "/tags";
 }

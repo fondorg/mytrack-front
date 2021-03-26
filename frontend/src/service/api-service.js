@@ -71,7 +71,14 @@ export default class Api {
             .post(`${this.baseUrl}/projects/${projectId}/issues`, issue)
             .then(response => response.data)
             .catch(err => console.log(err));
+    }
 
+    async updateProjectIssue(projectId, issueId, issue) {
+        this.defineHeaders();
+        return axios
+            .put(`${this.baseUrl}/projects/${projectId}/issues/${issueId}`, issue)
+            .then(response => response.data)
+            .catch(err => console.log(err));
     }
 
     async deleteProjectIssue(projectId, issueId) {
@@ -136,5 +143,12 @@ export default class Api {
         return axios.delete(`${this.baseUrl}/tags/${tagId}`)
             .then(resp => {})
             .catch(err => console.error(err))
+    }
+
+    async getIssueTags(projectId, issueId) {
+        this.defineHeaders()
+        return axios.get(`${this.baseUrl}/projects/${projectId}/issues/${issueId}/tags`)
+            .then(resp => resp.data)
+            .catch(err => console.error(err));
     }
 }

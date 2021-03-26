@@ -59,4 +59,9 @@ public class TagController {
     public void deleteCommonTag(@PathVariable Long tagId) {
         apiRestTemplate.delete(pathBuilder.getUrl(ApiV1Paths.TAG), tagId);
     }
+
+    @GetMapping(ApiV1Paths.ISSUE_TAGS)
+    public List<Tag> getIssueTags(@PathVariable Long projectId, @PathVariable Long issueId) {
+        return apiRestTemplate.exchangeAsList(pathBuilder.getUrl(ApiV1Paths.ISSUE_TAGS), projectId, issueId);
+    }
 }
