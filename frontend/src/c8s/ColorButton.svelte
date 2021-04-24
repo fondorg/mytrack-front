@@ -10,8 +10,9 @@
 </script>
 
 <button {disabled} on:click
-        class="{small ? 'px-1 py-1 text-xs' : 'px-4 py-2 text-sm'} leading-none border rounded {bgColor} {textColor} active:{pressedBackground}
-   {extraStyle}
+        class="{small ? 'px-1 py-1 text-xs' : 'px-4 py-2 text-sm'} leading-none border rounded {bgColor} {textColor}
+         active:{pressedBackground} {extraStyle}
+
 
    focus:outline-none
  lg:mt-0">{name}</button>

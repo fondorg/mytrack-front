@@ -7,6 +7,7 @@
     import ColorButton from "../c8s/ColorButton.svelte";
     import {push} from 'svelte-spa-router'
     import IssueTags from '../c8s/IssueTags.svelte'
+    import MicroTitle from "../c8s/MicroTitle.svelte";
 
     export let params;
     export let projectId;
@@ -34,17 +35,22 @@
             </div>
         </div>
         <div class="flex w-full justify-start items-center mt-1">
-            <div class="text-sm w-full">author: {issue.author.firstName} {issue.author.lastName}</div>
+            <div class="text-sm w-full">author: {issue.author != undefined ? issue.author.firstName + ' ' + issue.author.lastName : ''}</div>
             {#if issue.closed}
                 <div class="float-right px-1 border rounded bg-red-700 text-white text-xs">closed</div>
             {/if}
         </div>
-        <div class="divide-y divide-gray-400">
+        <div class="w-full divide-y divide-gray-400">
             <div id="desc-container"
                  class="w-full px-2 pt-2 md:p-3 text-sm text-justify whitespace-pre-wrap">{@html marked(issue.description)}</div>
-            <IssueTags {issue}/>
 
-            <div id="issue-action">
+            <div class="w-full py-2">
+                <MicroTitle title="Tags"/>
+                <IssueTags {issue}/>
+            </div>
+
+            <div id="issue-action" class="py-2">
+                <MicroTitle title="Actions"/>
                 <ColorButton small="true" on:click={switchCloseState}
                              name="{issue.closed ? 'Reopen issue' : 'Close issue'}" bgColor="border-red-700"
                              textColor="text-red-700"

@@ -2,6 +2,7 @@ package ru.fondorg.mytrackfront.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import ru.fondorg.mytrackfront.domain.Project;
 import ru.fondorg.mytrackfront.domain.ProjectProjection;
@@ -28,9 +29,8 @@ public class ProjectController {
 
     @GetMapping(ApiV1Paths.PROJECTS)
     public Page<ProjectProjection> getAllProjects(
-            @RequestParam(required = false) Integer page,
-            @RequestParam(required = false) Integer size) {
-        return apiRestTemplate.exchangeAsPage(pathBuilder.getUrl(ApiV1Paths.PROJECTS, ApiV1Paths.PAGE_PARAMS), page, size);
+            @RequestParam MultiValueMap<String, String> params) {
+        return apiRestTemplate.exchangeAsPage(pathBuilder.getUrl(ApiV1Paths.PROJECTS, params));
     }
 
     @GetMapping(ApiV1Paths.PROJECT)
