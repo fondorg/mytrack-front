@@ -16,7 +16,11 @@
     }
 
     async function onPageChange() {
-        issues = await api.getProjectIssues(projectId, queryParams.page, 5) || [];
+        queryParams.page = queryParams.page || 1;
+        queryParams.size = queryParams.size || 5;
+        // issues = await api.getProjectIssues(projectId, queryParams.page, 5) || [];
+        issues = await api.getProjectIssues(projectId, queryParams) || [];
+        // console.log(queryParams)
     }
 
 </script>

@@ -7,6 +7,7 @@
     import TextField from './TextField.svelte'
     import Checkbox from './Checkbox.svelte'
     import TextAreaField from './TextAreaField.svelte'
+    import ColorPicker from './ColorPicker.svelte'
     import Button from './Button.svelte'
     import {pop} from 'svelte-spa-router'
     import BusyScreen from './BusyScreen.svelte'
@@ -63,6 +64,9 @@
             <Checkbox label="{val.label}" bind:value={dataObject[key]} bind:errorMsg={validations[key]}/>
         {:else if val.type === 'textarea'}
             <TextAreaField label="{val.label}" bind:value={dataObject[key]} bind:errorMsg={validations[key]}
+                           autofocus="{val.autofocus || false}"/>
+        {:else if val.type === 'colorPicker'}
+            <ColorPicker label="{val.label}" bind:value={dataObject[key]} bind:errorMsg={validations[key]}
                            autofocus="{val.autofocus || false}"/>
         {/if}
     {/each}

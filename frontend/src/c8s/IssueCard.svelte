@@ -1,4 +1,6 @@
 <script>
+    import IssueTagLabel from './IssueTagLabel.svelte'
+
     export let issue;
 
 </script>
@@ -12,7 +14,16 @@
             </a>
         </div>
         {#if issue.author}
-            <div class="text-xs">{issue.author.firstName} {issue.author.lastName}</div>
+            <div class="text-xs flex items-center">
+                <div>
+                    {issue.author.firstName} {issue.author.lastName}
+                </div>
+                <div class="flex ml-4 space-x-1">
+                    {#each issue.tags as tag}
+                        <IssueTagLabel href={`#/projects/${issue.projectId}/issues/?tags[]=${tag.name}`} {tag} size="xs"/>
+                    {/each}
+                </div>
+            </div>
         {/if}
     </div>
 {/if}

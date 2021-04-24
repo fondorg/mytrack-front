@@ -11,6 +11,9 @@
     import IssueView from './IssueView.svelte'
     import IssueEdit from './IssueEdit.svelte'
     import ProjectHome from './ProjectHome.svelte'
+    import ProjectTags from './ProjectTags.svelte'
+    import TagEdit from './TagEdit.svelte'
+    import TagView from './TagView.svelte'
 
     export let params;
 
@@ -29,6 +32,11 @@
             link: `/projects/${params.id}/members`,
             title: 'Members',
             icon: '/img/user-groups.svg'
+        },
+        {
+            link: `/projects/${params.id}/tags`,
+            title: 'Tags',
+            icon: '/img/tag.svg'
         },
         {
             link: `/project-edit/${params.id}`,
@@ -61,6 +69,22 @@
             }),
             '/issues/:issueId/edit': wrap({
                 component: IssueEdit,
+                props: {projectId: params.id}
+            }),
+            '/tags': wrap({
+                component: ProjectTags,
+                props: {projectId: params.id}
+            }),
+            '/tags/new': wrap({
+                component: TagEdit,
+                props: {projectId: params.id}
+            }),
+            '/tags/:tagId': wrap({
+                component: TagEdit,
+                props: {projectId: params.id}
+            }),
+            '/tags/:tagId/edit': wrap({
+                component: TagEdit,
                 props: {projectId: params.id}
             })
         };

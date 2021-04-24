@@ -23,6 +23,11 @@ public class ApiRestTemplate extends KeycloakRestTemplate {
                 }).getBody();
     }
 
+    public <T> List<T> exchangeAsList(String uri, Object... uriVars) {
+        return exchange(uri, HttpMethod.GET, null,
+                new ParameterizedTypeReference<List<T>>() {
+                }, uriVars).getBody();
+    }
     public <T> PageResource<T> exchangeAsPage(String uri, Object... uriVars) {
         return exchange(uri, HttpMethod.GET, null,
                 new ParameterizedTypeReference<PageResource<T>>() {

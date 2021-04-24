@@ -16,4 +16,10 @@ public final class ApiV1Paths {
     public static final String ISSUES = "/api/v1/issues";
     public static final String ISSUE = "/api/v1/issues/{id}";
     public static final String ISSUES_PAGE = "/api/v1/issues";
+
+    public static final String PROJECT_TAGS = "/api/v1/projects/{projectId}/tags";
+    public static final String PROJECT_TAG = "/api/v1/projects/{projectId}/tags/{tagId}";
+    public static final String TAGS = "/api/v1/tags";
+    public static final String TAG = "/api/v1/tags/{tagId}";
+    public static final String ISSUE_TAGS = PROJECT_ISSUE + "/tags";
 }

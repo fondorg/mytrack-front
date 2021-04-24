@@ -18,6 +18,7 @@
     async function onPageChange() {
         projects = await api.getProjects(queryParams.page, 5) || [];
         console.log(projects)
+        console.log('onPageChange')
     }
 
 </script>
