@@ -36,9 +36,12 @@
             <a href="#/projects" class="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-600 mr-4">
                 Projects
             </a>
-            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-600">
-                Blog
+            <a href="#/tags" class="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-600 mr-4">
+                Tags
             </a>
+            <!--<a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 hover:text-gray-600">
+                Blog
+            </a>-->
         </div>
         <div class="flex items-center mt-4 lg:mt-0">
             {#if !$isAuthenticated}

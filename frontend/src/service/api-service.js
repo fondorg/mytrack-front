@@ -119,9 +119,9 @@ export default class Api {
             .catch(err => console.error(err))
     }
 
-    async getCommonTags() {
+    async getCommonTags(params = {}) {
         this.defineHeaders()
-        return axios.get(`${this.baseUrl}/tags`)
+        return axios.get(`${this.baseUrl}/tags`, params)
             .then(resp => resp.data)
             .catch(err => console.error(err))
     }

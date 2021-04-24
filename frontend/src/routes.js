@@ -9,6 +9,7 @@ import ProjectView from './routes/ProjectView.svelte'
 import {wrap} from 'svelte-spa-router/wrap'
 import {isAuthenticated} from './c8s/OidcContext.svelte'
 import {get} from 'svelte/store'
+import CommonTags from './routes/CommonTags.svelte'
 
 
 const authConditions = [
@@ -66,6 +67,10 @@ let authRoutes = {
     }),
     '/workspace': wrap({
         component: Workspace,
+        conditions: authConditions
+    }),
+    '/tags': wrap({
+        component: CommonTags,
         conditions: authConditions
     })
 }
