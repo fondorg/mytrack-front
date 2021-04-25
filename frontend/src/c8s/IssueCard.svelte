@@ -6,7 +6,7 @@
 </script>
 
 {#if issue}
-    <div class="flex flex-col p-2 border rounded-sm w-full  md:w-3/4 mb-2 mx-2 bg-gray-100">
+    <div class="flex flex-col p-2 border rounded-sm w-full md:w-3/4 mb-2 mx-2 bg-gray-100">
         <div class="flex items-start">
             <img class="w-5 mr-2" src="/img/project.svg">
             <a href="#/projects/{issue.projectId}/issues/{issue.id}">
