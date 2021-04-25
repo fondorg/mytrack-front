@@ -6,8 +6,14 @@
     export let projectId;
     const api = new Api();
 
+    export let commonTag = false;
+
     let redirect = (tag, deleted) => {
-        return `#/projects/${projectId}/tags/`
+        if (commonTag) {
+            return `#/tags`
+        } else {
+            return `#/projects/${projectId}/tags/`
+        }
     }
 
     export let tag = {
@@ -42,15 +48,27 @@
     };
 
     async function getTag() {
-        return await api.getProjectTag(projectId, params.tagId);
+        if (commonTag) {
+            return await api.getCommonTag(params.tagId);
+        } else {
+            return await api.getProjectTag(projectId, params.tagId);
+        }
     }
 
     async function saveTag(tag) {
-        return await api.saveProjectTag(projectId, tag);
+        if(commonTag) {
+            return await api.saveCommonTag(tag);
+        } else {
+            return await api.saveProjectTag(projectId, tag);
+        }
     }
 
     async function deleteTag(tag) {
-        return await api.deleteProjectTag(projectId, tag.id);
+        if (commonTag) {
+            return await api.deleteCommonTag(tag.id);
+        } else {
+            return await api.deleteProjectTag(projectId, tag.id);
+        }
     }
 </script>
 

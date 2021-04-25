@@ -2,6 +2,7 @@ package ru.fondorg.mytrackfront.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import ru.fondorg.mytrackfront.domain.Tag;
 import ru.fondorg.mytrackfront.restclient.ApiRestTemplate;
@@ -33,11 +34,8 @@ public class TagController {
     }
 
     @GetMapping(ApiV1Paths.TAGS)
-    public Page<Tag> getCommonTags(
-            @PathVariable Long projectId,
-            @RequestParam(required = false) Integer page,
-            @RequestParam(required = false) Integer size) {
-        return apiRestTemplate.exchangeAsPage(pathBuilder.getUrl(ApiV1Paths.PROJECT_TAGS, ApiV1Paths.PAGE_PARAMS), projectId, page, size);
+    public Page<Tag> getCommonTags(@RequestParam MultiValueMap<String, String> params) {
+        return apiRestTemplate.exchangeAsPage(pathBuilder.getUrl(ApiV1Paths.TAGS, params));
     }
 
     @GetMapping(ApiV1Paths.PROJECT_TAG)

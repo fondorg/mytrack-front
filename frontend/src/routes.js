@@ -5,10 +5,13 @@ import Workspace from './routes/Workspace.svelte'
 import Login from './routes/Login.svelte'
 import ProjectEdit from './routes/ProjectEdit.svelte'
 import IssueEdit from './routes/IssueEdit.svelte'
-import ProjectView from './routes/ProjectView.svelte'
+import ProjectView, {params} from './routes/ProjectView.svelte'
 import {wrap} from 'svelte-spa-router/wrap'
 import {isAuthenticated} from './c8s/OidcContext.svelte'
 import {get} from 'svelte/store'
+import CommonTags from './routes/CommonTags.svelte'
+import CommonTagEdit from "./routes/CommonTagEdit.svelte";
+import TagEdit from "./routes/TagEdit.svelte";
 
 
 const authConditions = [
@@ -36,16 +39,16 @@ let authRoutes = {
         component: Projects,
         conditions: authConditions
     }),
-    '/projects/:id': wrap( {
-       component:  ProjectView,
+    '/projects/:id': wrap({
+        component: ProjectView,
         conditions: authConditions
     }),
-    '/projects/:id/edit': wrap( {
-        component:  ProjectEdit,
+    '/projects/:id/edit': wrap({
+        component: ProjectEdit,
         conditions: authConditions
     }),
-    '/projects/:id/*': wrap( {
-        component:  ProjectView,
+    '/projects/:id/*': wrap({
+        component: ProjectView,
         conditions: authConditions
     }),
     '/project-edit': wrap({
@@ -67,7 +70,20 @@ let authRoutes = {
     '/workspace': wrap({
         component: Workspace,
         conditions: authConditions
-    })
+    }),
+    '/tags': wrap({
+        component: CommonTags,
+        conditions: authConditions
+    }),
+    '/tags/new': wrap({
+        component: CommonTagEdit,
+        conditions: authConditions
+    }),
+    '/tags/:tagId': wrap({
+        component: TagEdit,
+        conditions: authConditions,
+        props: {commonTag: true}
+    }),
 }
 
 let anonymousRoutes = {
