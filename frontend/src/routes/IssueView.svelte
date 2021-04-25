@@ -27,8 +27,9 @@
 
 {#if issue}
     <CenteredFlex>
-        <div class="font-bold text-sm">
-            <a class="underline" href="#/projects/{projectId}/issues">issues</a> > issue #{issue.pid}</div>
+        <div class="text-sm mb-2">
+            <a class="underline" href="#/projects/{projectId}/issues">issues</a> > issue #{issue.pid}
+        </div>
         <div id="title-container" class="flex w-full items-start">
             <div class="text-md font-bold flex-grow">{issue.title}</div>
             <div class="pt-1 flex">
@@ -36,9 +37,14 @@
             </div>
         </div>
         <div class="flex w-full justify-start items-center mt-1">
-            <div class="text-sm w-full">author: {issue.author != undefined ? issue.author.firstName + ' ' + issue.author.lastName : ''}</div>
+            <div class="text-sm">
+                author: {issue.author != undefined ? issue.author.firstName + ' ' + issue.author.lastName : ''}
+            </div>
+            <div class="ml-2 text-sm">
+                created: {issue.created}
+            </div>
             {#if issue.closed}
-                <div class="float-right px-1 border rounded bg-red-700 text-white text-xs">closed</div>
+                <div class="ml-2 float-right px-1 border rounded bg-red-700 text-white text-xs">closed</div>
             {/if}
         </div>
         <div class="w-full divide-y divide-gray-400">
