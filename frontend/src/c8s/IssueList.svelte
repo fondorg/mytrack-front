@@ -1,8 +1,19 @@
 <script>
     import IssueCard from './IssueCard.svelte'
+    import {querystring} from 'svelte-spa-router'
+    import {parse, stringify} from "qs";
 
     export let projectId;
     export let issues = [];
+
+    $: queryParams = parse($querystring)
+
+    function queryWithScope(scope) {
+        let qp = {}
+        Object.assign(qp, queryParams)
+        qp.scope = scope;
+        return stringify(qp, {arrayFormat: 'brackets'})
+    }
 
 </script>
 
@@ -11,6 +22,14 @@
 {:else}
     <h1 class="font-bold">Issues</h1>
 {/if}
+<div class="underline flex pb-1 w-full md:w-3/4">
+    <a class="text-sm px-1" class:bg-green-100={queryParams.scope === undefined || queryParams.scope === 'open'}
+       href="#/projects/{projectId}/issues?{queryWithScope('open')}">Open</a>
+    <a class="text-sm px-1" class:bg-green-100={queryParams.scope === 'closed'}
+       href="#/projects/{projectId}/issues?{queryWithScope('closed')}">Closed</a>
+    <a class="text-sm px-1" class:bg-green-100={queryParams.scope === 'all'}
+       href="#/projects/{projectId}/issues?{queryWithScope('all')}">All</a>
+</div>
 {#if issues.content}
     {#each issues.content as issue}
         <IssueCard {issue}/>

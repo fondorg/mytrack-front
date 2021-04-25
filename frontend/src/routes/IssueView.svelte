@@ -27,7 +27,7 @@
 
 {#if issue}
     <CenteredFlex>
-        <div class="font-bold">issue #{issue.id}</div>
+        <div class="font-bold">issue #{issue.pid}</div>
         <div id="title-container" class="flex w-full items-start">
             <div class="text-md font-bold flex-grow">{issue.title}</div>
             <div class="pt-1 flex">
