@@ -20,9 +20,8 @@
         queryParams.size = queryParams.size || 5;
         // issues = await api.getProjectIssues(projectId, queryParams.page, 5) || [];
         issues = await api.getProjectIssues(projectId, queryParams) || [];
-        // console.log(queryParams)
+        console.log(queryParams)
     }
-
 </script>
 
 <CenteredFlex>
@@ -30,5 +29,5 @@
         <LinkButton name="New Issue" href="#/projects/{projectId}/issues/new" defaultAction="true"/>
     </div>
     <IssueList {issues} projectId="{projectId}"/>
-    <Pagination totalPages="{issues.totalPages}" currentPage="{queryParams.page || 1}" url="#/projects/{projectId}/issues?"/>
+    <Pagination totalPages="{issues.totalPages}" currentPage="{queryParams.page || 1}" url="#/projects/{projectId}/issues?" qParams="{queryParams}"/>
 </CenteredFlex>

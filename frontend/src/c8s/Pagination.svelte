@@ -2,12 +2,25 @@
     import './CenteredFlex.svelte'
     import CenteredFlex from "./CenteredFlex.svelte";
     import {afterUpdate} from 'svelte'
+    import {stringify} from 'qs'
 
     export let totalPages;
     export let currentPage;
     export let url;
+    export let qParams;
 
     let pages = [];
+
+    function extraParams() {
+        return stringify(qParams, {
+            filter: (prefix, value) => {
+                if (prefix === 'page' || prefix === 'size') {
+                    return;
+                }
+                return value;
+            }
+        });
+    }
 
     afterUpdate(() => {
         pages = [];
@@ -45,18 +58,18 @@
 <CenteredFlex>
     {#if totalPages > 1}
         <div class="flex flex-wrap">
-            <a href="{url + `page=${currentPage > 1 ? currentPage - 1 : '1'}`}"
+            <a href="{url + `page=${currentPage > 1 ? currentPage - 1 : '1'}&${extraParams()}`}"
                class="px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 rounded border" rel="prev">«</a>
             {#each pages as p, i}
                 {#if !p.dots}
-                    <a href="{url + `page=${p.p}`}" class="px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 rounded border"
+                    <a href="{url + `page=${p.p}&${extraParams()}`}" class="px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 rounded border"
                        class:bg-green-200="{parseInt(currentPage) === p.p}">{p.p}</a>
                 {:else}
                     <div class="h-full align-bottom px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 text-lg">...</div>
                 {/if}
             {/each}
             <!--<div class="h-full align-bottom px-4 py-1 md:py-2 m-1 md:m-2 text-lg">...</div>-->
-            <a href="{url + `page=${currentPage < totalPages ? parseInt(currentPage) + 1 : totalPages}`}"
+            <a href="{url + `page=${currentPage < totalPages ? parseInt(currentPage) + 1 : totalPages}&${extraParams()}`}"
                class="px-2 md:px-4 py-1 md:py-2 m-1 md:m-2 rounded border" rel="next">»</a>
         </div>
     {/if}
