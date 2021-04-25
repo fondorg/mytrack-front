@@ -7,12 +7,22 @@ export default class Api {
 
     baseUrl = "API_BASE_URL";
 
+    constructor() {
+        this.defineHeaders()
+    }
+
     defineHeaders() {
         axios.defaults.headers.common['Authorization'] = 'Bearer ' + get(accessToken)
     }
 
+    async procResponse(promise) {
+        return promise
+            .then(resp => resp.data)
+            .catch(err => console.error(err));
+    }
+
     async getProject(id) {
-        this.defineHeaders();
+        // this.defineHeaders();
         return axios
             .get(`${this.baseUrl}/projects/${id}`)
             .then(response => response.data)
@@ -22,7 +32,7 @@ export default class Api {
     }
 
     async getProjects(page = 1, size = 20) {
-        this.defineHeaders();
+        // this.defineHeaders();
         return axios
             .get(`${this.baseUrl}/projects?page=${page}&size=${size}`)
             .then(response => response.data)
@@ -32,7 +42,7 @@ export default class Api {
     }
 
     async saveProject(project) {
-        this.defineHeaders();
+        // this.defineHeaders();
         return axios
             .post(`${this.baseUrl}/projects`, project)
             .then(response => response.data)
@@ -40,7 +50,7 @@ export default class Api {
     }
 
     async deleteProject(projectId) {
-        this.defineHeaders()
+        // this.defineHeaders()
         return axios
             .delete(`${this.baseUrl}/projects/${projectId}`)
             .then(response => {
@@ -49,7 +59,7 @@ export default class Api {
     }
 
     async getProjectIssues(projectId, params = {}) {
-        this.defineHeaders();
+        // this.defineHeaders();
         return axios
             // .get(`${this.baseUrl}/projects/${projectId}/issues?page=${params.page}&size=${params.size}` )
             .get(`${this.baseUrl}/projects/${projectId}/issues`, {
@@ -64,7 +74,7 @@ export default class Api {
     }
 
     async getProjectIssue(projectId, issueId) {
-        this.defineHeaders();
+        // this.defineHeaders();
         return axios
             .get(`${this.baseUrl}/projects/${projectId}/issues/${issueId}`)
             .then(response => response.data)
@@ -74,7 +84,7 @@ export default class Api {
     }
 
     async saveProjectIssue(projectId, issue) {
-        this.defineHeaders();
+        // this.defineHeaders();
         return axios
             .post(`${this.baseUrl}/projects/${projectId}/issues`, issue)
             .then(response => response.data)
@@ -90,7 +100,7 @@ export default class Api {
     // }
 
     async deleteProjectIssue(projectId, issueId) {
-        this.defineHeaders();
+        // this.defineHeaders();
         return axios
             .delete(`${this.baseUrl}/projects/${projectId}/issues/${issueId}`)
             .then(response => {
@@ -99,50 +109,49 @@ export default class Api {
     }
 
     async saveProjectTag(projectId, tag) {
-        this.defineHeaders()
+        // this.defineHeaders()
         return axios.post(`${this.baseUrl}/projects/${projectId}/tags`, tag)
             .then(resp => resp.data)
             .catch(err => console.error(err))
     }
 
     async saveCommonTag(tag) {
-        this.defineHeaders()
+        // this.defineHeaders()
         return axios.post(`${this.baseUrl}/tags`, tag)
             .then(resp => resp.data)
             .catch(err => console.error(err))
     }
 
     async getProjectTags(projectId) {
-        this.defineHeaders()
+        // this.defineHeaders()
         return axios.get(`${this.baseUrl}/projects/${projectId}/tags`)
             .then(resp => resp.data)
             .catch(err => console.error(err))
     }
 
     async getCommonTags(params = {}) {
-        this.defineHeaders()
+        // this.defineHeaders()
         return axios.get(`${this.baseUrl}/tags`, params)
             .then(resp => resp.data)
             .catch(err => console.error(err))
     }
 
     async getProjectTag(projectId, tagId) {
-        this.defineHeaders()
+        // this.defineHeaders()
         return axios.get(`${this.baseUrl}/projects/${projectId}/tags/${tagId}`)
             .then(resp => resp.data)
             .catch(err => console.error(err))
     }
 
     async getCommonTag(tagId) {
-        console.log('getting common tag: ', tagId)
-        this.defineHeaders()
+        // this.defineHeaders()
         return axios.get(`${this.baseUrl}/tags/${tagId}`)
             .then(resp => resp.data)
             .catch(err => console.error(err))
     }
 
     async deleteProjectTag(projectId, tagId) {
-        this.defineHeaders()
+        // this.defineHeaders()
         return axios.delete(`${this.baseUrl}/projects/${projectId}/tags/${tagId}`)
             .then(resp => {
             })
@@ -150,7 +159,7 @@ export default class Api {
     }
 
     async deleteCommonTag(tagId) {
-        this.defineHeaders()
+        // this.defineHeaders()
         return axios.delete(`${this.baseUrl}/tags/${tagId}`)
             .then(resp => {
             })
@@ -158,9 +167,26 @@ export default class Api {
     }
 
     async getIssueTags(projectId, issueId) {
-        this.defineHeaders()
-        return axios.get(`${this.baseUrl}/projects/${projectId}/issues/${issueId}/tags`)
-            .then(resp => resp.data)
-            .catch(err => console.error(err));
+        return this.procResponse(axios.get(`${this.baseUrl}/projects/${projectId}/issues/${issueId}/tags`))
+    }
+
+    async saveComment(projectId, issueId, comment) {
+        return this.procResponse(
+            axios.post(`${this.baseUrl}/projects/${projectId}/issues/${issueId}/comments`, comment))
+    }
+
+    async getIssueComments(projectId, issueId, params = {}) {
+        return this.procResponse(
+            axios.get(`${this.baseUrl}/projects/${projectId}/issues/${issueId}/comments`, {params}))
+    }
+
+    async getComment(projectId, issueId, commentId) {
+        return this.procResponse(
+            axios.get(`${this.baseUrl}/projects/${projectId}/issues/${issueId}/comments/${commentId}`))
+    }
+
+    async deleteComment(projectId, issueId, commentId) {
+        return this.procResponse(
+            axios.delete(`${this.baseUrl}/projects/${projectId}/issues/${issueId}/comments/${commentId}`))
     }
 }

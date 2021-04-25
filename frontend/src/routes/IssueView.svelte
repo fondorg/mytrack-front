@@ -8,6 +8,7 @@
     import {push} from 'svelte-spa-router'
     import IssueTags from '../c8s/IssueTags.svelte'
     import MicroTitle from "../c8s/MicroTitle.svelte";
+    import IssueComments from '../c8s/IssueComments.svelte'
 
     export let params;
     export let projectId;
@@ -62,6 +63,10 @@
                              name="{issue.closed ? 'Reopen issue' : 'Close issue'}" bgColor="border-red-700"
                              textColor="text-red-700"
                              pressedBackground="bg-red-200"/>
+            </div>
+            <div id="issue-comments" class="py-2">
+                <MicroTitle title="Comments"/>
+                <IssueComments {projectId} issueId="{issue.id}"/>
             </div>
         </div>
     </CenteredFlex>
