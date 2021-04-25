@@ -16,7 +16,7 @@
         <div class="text-xs flex items-start">
             <div class="text-sm mr-2">#{issue.pid}</div>
             <div class="md:flex">
-                <div>
+                <div class="mr-2">
                     {#if issue.author}
                         <div class="mr-2">
                             Author: {issue.author.firstName} {issue.author.lastName}
