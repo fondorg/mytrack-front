@@ -1,12 +1,15 @@
 <script>
     import ProjectCard from './ProjectCard.svelte'
     import LinkButton from './LinkButton.svelte'
+    import HugeTitle from './HugeTitle.svelte'
 
     export let projects = {};
 </script>
 
 
-<h1 class="text-2xl mb-2">Your projects</h1>
+<!--<h1 class="text-2xl mb-2">Your projects</h1>-->
+<HugeTitle title="Your projects"/>
+
 <div class="w-full flex justify-end py-2">
     <LinkButton name="New Project" href="#/project-edit"/>
 </div>
