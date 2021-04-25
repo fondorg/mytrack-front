@@ -1,26 +1,26 @@
 <script>
-    import {push} from 'svelte-spa-router'
-    import {login, isAuthenticated} from '../c8s/OidcContext.svelte'
     import {onMount} from 'svelte';
-    import LinkButton from '../c8s/LinkButton.svelte'
     import Layout from '../c8s/Layout.svelte'
     import CenteredFlex from "../c8s/CenteredFlex.svelte";
-
-    /*$: {
-        if ($isAuthenticated) {
-            console.log('redirecting to tasks')
-            push("/tasks");
-        }
-    }*/
+    import MediumTitle from '../c8s/MediumTitle.svelte'
+    import MicroTitle from '../c8s/MicroTitle.svelte'
 
     onMount(() => {
-        console.log("Home onMount")
     })
 </script>
 
 <Layout>
     <CenteredFlex>
-        <div class="mt-10">Home component</div>
-        <div class="mt-10">Check out your <a class="underline" href="#/projects">Projects</a></div>
+        <MediumTitle title="MyTrack. Issue tracker"/>
+        <div class="mt-5">Check out your <a class="underline" href="#/projects">Projects</a></div>
+
+
+        <CenteredFlex extraClasses="mt-10">
+            <div class="border-t w-11/12 pb-2"></div>
+            <MicroTitle title="General purpose issue tracker"/>
+            <p class="text-justify md:w-3/4">
+                This is an open source training project
+            </p>
+        </CenteredFlex>
     </CenteredFlex>
 </Layout>
