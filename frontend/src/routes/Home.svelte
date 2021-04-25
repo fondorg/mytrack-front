@@ -46,6 +46,7 @@
                     <ul class="list-disc">
                         <li>Spring Boot</li>
                         <li>Spring Data JPA</li>
+                        <li>MySQL</li>
                         <li>
                             <ExtLink href="http://www.querydsl.com/" title="Querydsl"/>
                         </li>
