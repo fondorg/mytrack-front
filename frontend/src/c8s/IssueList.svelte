@@ -21,7 +21,6 @@
     <div>No issues yet.</div>
 {:else}
     <h1 class="font-bold">Issues</h1>
-    {$querystring}
 {/if}
 <div class="underline flex pb-1 w-full md:w-3/4">
     <a class="px-1" class:bg-green-200={queryParams.scope === undefined || queryParams.scope === 'open'}
