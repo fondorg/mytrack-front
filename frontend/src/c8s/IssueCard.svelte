@@ -10,20 +10,27 @@
         <div class="flex items-start">
             <img class="w-5 mr-2" src="/img/project.svg">
             <a href="#/projects/{issue.projectId}/issues/{issue.id}">
-                <div class=" text-base md:text-base">{issue.title}</div>
+                <div class="text-base md:text-base">{issue.title}</div>
             </a>
         </div>
-        {#if issue.author}
-            <div class="text-xs flex items-center">
+        <div class="text-xs flex items-start">
+            <div class="text-sm mr-2">#{issue.pid}</div>
+            <div class="md:flex">
                 <div>
-                    {issue.author.firstName} {issue.author.lastName}
+                    {#if issue.author}
+                        <div class="mr-2">
+                            Author: {issue.author.firstName} {issue.author.lastName}
+                        </div>
+                    {/if}
+                    <div>created: {issue.created}</div>
                 </div>
-                <div class="flex ml-4 space-x-1">
+                <div class="flex space-x-1">
                     {#each issue.tags as tag}
-                        <IssueTagLabel href={`#/projects/${issue.projectId}/issues/?tags[]=${tag.name}`} {tag} size="xs"/>
+                        <IssueTagLabel href={`#/projects/${issue.projectId}/issues/?tags[]=${tag.name}`} {tag}
+                                       size="xs"/>
                     {/each}
                 </div>
             </div>
-        {/if}
+        </div>
     </div>
 {/if}

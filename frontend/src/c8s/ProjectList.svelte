@@ -14,8 +14,12 @@
     <LinkButton name="New Project" href="#/project-edit"/>
 </div>
 
-{#if projects.content}
+{#if projects.content && projects.content.length > 0}
     {#each projects.content as p}
         <ProjectCard id="{p.project.id}" title="{p.project.title}" desc="{p.project.description}"/>
     {/each}
+{:else}
+    <div class="mt-8">
+        No projects yet. <a class="underline font-bold" href="#/project-edit">Create</a> one.
+    </div>
 {/if}

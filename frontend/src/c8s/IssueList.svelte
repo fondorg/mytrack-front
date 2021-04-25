@@ -23,11 +23,11 @@
     <h1 class="font-bold">Issues</h1>
 {/if}
 <div class="underline flex pb-1 w-full md:w-3/4">
-    <a class="px-1" class:bg-green-200={queryParams.scope === undefined || queryParams.scope === 'open'}
+    <a class="text-sm px-1" class:bg-green-100={queryParams.scope === undefined || queryParams.scope === 'open'}
        href="#/projects/{projectId}/issues?{queryWithScope('open')}">Open</a>
-    <a class="px-1" class:bg-green-200={queryParams.scope === 'closed'}
+    <a class="text-sm px-1" class:bg-green-100={queryParams.scope === 'closed'}
        href="#/projects/{projectId}/issues?{queryWithScope('closed')}">Closed</a>
-    <a class="px-1" class:bg-green-200={queryParams.scope === 'all'}
+    <a class="text-sm px-1" class:bg-green-100={queryParams.scope === 'all'}
        href="#/projects/{projectId}/issues?{queryWithScope('all')}">All</a>
 </div>
 {#if issues.content}
