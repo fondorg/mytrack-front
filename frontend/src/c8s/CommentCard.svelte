@@ -6,15 +6,17 @@
     import Api from '../service/api-service'
     import {createEventDispatcher} from 'svelte'
     import marked from 'marked'
+    import MarkdownCss from './MarkdownCss.svelte'
 
     export let comment;
     export let projectId;
-
     const api = new Api();
     const dispatch = createEventDispatcher();
     let showDeleteConfirm = false;
+    let editMode = false;
 
     function editComment() {
+        editMode = true;
 
     }
 
@@ -26,6 +28,7 @@
     }
 </script>
 
+<MarkdownCss/>
 {#if showDeleteConfirm}
     <ModalWindow on:closeModal={() => showDeleteConfirm = false} backdrop="true">
         <div>
@@ -40,20 +43,23 @@
     </ModalWindow>
 {/if}
 <div class="flex flex-col w-full border rounded-sm p-1">
-    {#if comment.author}
-        <div class="grid grid-cols-2">
-            <div class="flex">
+    <div class="grid grid-cols-2">
+        <div class="flex">
+            {#if comment.author}
                 <div class="text-xs font-bold">{comment.author.firstName} {comment.author.lastName}</div>
                 <div class="text-xs pl-4">{comment.created}</div>
-            </div>
-            <div class="flex justify-end space-x-1 pb-2">
-                <ColorButton extraStyle="self-stretch justify-self-end" small="true" name="edit"
-                             on:click={editComment}/>
-                <ColorButton bgColor="bg-red-400" textColor="text-white" name="delete" small="true"
-                             on:click={() => showDeleteConfirm = true}/>
-            </div>
-
+            {/if}
         </div>
-        <div class="desc-container">{@html marked(comment.text)}</div>
+        <div class="flex justify-end space-x-1 pb-2">
+            <ColorButton extraStyle="self-stretch justify-self-end" small="true" name="edit"
+                         on:click={editComment}/>
+            <ColorButton bgColor="bg-red-400" textColor="text-white" name="delete" small="true"
+                         on:click={() => showDeleteConfirm = true}/>
+        </div>
+    </div>
+    {#if editMode}
+        <div
+    {:else}
+        <div id="markdown-container">{@html marked(comment.text)}</div>
     {/if}
 </div>

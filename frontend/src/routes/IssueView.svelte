@@ -9,6 +9,7 @@
     import IssueTags from '../c8s/IssueTags.svelte'
     import MicroTitle from "../c8s/MicroTitle.svelte";
     import IssueComments from '../c8s/IssueComments.svelte'
+    import MarkdownCss from '../c8s/MarkdownCss.svelte'
 
     export let params;
     export let projectId;
@@ -26,6 +27,7 @@
     }
 </script>
 
+<MarkdownCss/>
 {#if issue}
     <CenteredFlex>
         <div class="text-sm mb-2">
@@ -49,7 +51,7 @@
             {/if}
         </div>
         <div class="w-full divide-y divide-gray-400">
-            <div id="desc-container"
+            <div id="markdown-container"
                  class="w-full px-2 pt-2 md:p-3 text-sm text-justify whitespace-pre-wrap">{@html marked(issue.description)}</div>
 
             <div class="w-full py-2">
@@ -72,34 +74,4 @@
     </CenteredFlex>
 {/if}
 
-<style>
-    #desc-container :global(h1) {
-        font-size: 2rem;
-        font-weight: bold;
-    }
 
-    #desc-container :global(h2) {
-        font-size: 1.5rem;
-        font-weight: bold;
-    }
-
-    #desc-container :global(h3) {
-        font-size: 1rem;
-        font-weight: bold;
-    }
-
-    #desc-container :global(h4) {
-        font-size: 0.75rem;
-        font-weight: bold;
-    }
-
-    #desc-container :global(a) {
-        color: blue;
-        text-decoration: underline;
-    }
-
-    #desc-container :global(ol, ul) {
-        list-style: inside;
-    }
-
-</style>
