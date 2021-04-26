@@ -27,11 +27,6 @@ public class IssueController {
         return keycloakRestTemplate.postForObject(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUES), issue, Issue.class, id);
     }
 
-//    @PostMapping(ApiV1Paths.PROJECT_ISSUES)
-//    public Issue updateProjectIssue(@PathVariable Long id, @Valid @RequestBody Issue issue) {
-//        return keycloakRestTemplate.postForObject(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUES), issue, Issue.class, id);
-//    }
-
     @GetMapping(ApiV1Paths.PROJECT_ISSUES)
     public Page<Issue> getProjectIssues(@PathVariable String id,
                                         @RequestParam MultiValueMap<String, String> params) {
@@ -43,19 +38,9 @@ public class IssueController {
         return apiRestTemplate.getForObject(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUE), Issue.class, projectId, issueId);
     }
 
-
     @DeleteMapping(ApiV1Paths.PROJECT_ISSUE)
     public void deleteProjectIssue(@PathVariable Long projectId, @PathVariable Long issueId) {
         apiRestTemplate.delete(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUE), projectId, issueId);
     }
-
-//    @GetMapping(ApiV1Paths.PROJECT_ISSUES)
-//    public Page<Issue> findProjectIssuesByTag(@PathVariable String id,
-//                                              @RequestParam Long tagId,
-//                                              @RequestParam(required = false) Integer page,
-//                                              @RequestParam(required = false) Integer size) {
-//        return apiRestTemplate.exchangeAsPage(pathBuilder.getUrl(ApiV1Paths.PROJECT_ISSUES, "tagId={tagId}", ApiV1Paths.PAGE_PARAMS),
-//                id, tagId, page, size);
-//    }
 
 }

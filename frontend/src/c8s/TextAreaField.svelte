@@ -14,7 +14,6 @@
             setTimeout(() => {
                 input.focus();
             }, 0)
-
         }
     })
 </script>

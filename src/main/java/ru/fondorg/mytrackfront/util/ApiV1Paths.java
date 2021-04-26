@@ -22,4 +22,7 @@ public final class ApiV1Paths {
     public static final String TAGS = "/api/v1/tags";
     public static final String TAG = "/api/v1/tags/{tagId}";
     public static final String ISSUE_TAGS = PROJECT_ISSUE + "/tags";
+
+    public static final String ISSUE_COMMENTS = PROJECT_ISSUE + "/comments";
+    public static final String ISSUE_COMMENT = PROJECT_ISSUE + "/comments/{commentId}";
 }

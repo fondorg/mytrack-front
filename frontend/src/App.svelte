@@ -50,7 +50,6 @@
 
 {/if}
 
-
 <!--{#if !$isLoading && $isAuthenticated}
     <ProjectList/>
 {/if}-->
