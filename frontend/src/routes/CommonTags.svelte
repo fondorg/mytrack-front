@@ -8,6 +8,7 @@
     import LinkButton from '../c8s/LinkButton.svelte'
     import TagList from '../c8s/TagList.svelte'
     import HugeTitle from '../c8s/HugeTitle.svelte'
+    import Pagination from '../c8s/Pagination.svelte'
 
     let tags = []
 
@@ -18,8 +19,9 @@
     }
 
     async function onPageChange() {
+        console.log('onPageChange')
         queryParams.page = queryParams.page || 1
-        queryParams.size = queryParams.si || 5
+        queryParams.size = queryParams.size || 5
         tags = await api.getCommonTags(queryParams) || [];
     }
 
@@ -32,5 +34,6 @@
             <LinkButton name="Add Common Tag" href="#/tags/new"/>
         </div>
         <TagList tags={tags.content} commonTags="true"/>
+        <Pagination totalPages={tags.totalPages} currentPage={queryParams.page || 1} url="#/tags?"/>
     </CenteredFlex>
 </Layout>

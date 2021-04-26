@@ -131,7 +131,7 @@ export default class Api {
 
     async getCommonTags(params = {}) {
         // this.defineHeaders()
-        return axios.get(`${this.baseUrl}/tags`, params)
+        return axios.get(`${this.baseUrl}/tags`, {params})
             .then(resp => resp.data)
             .catch(err => console.error(err))
     }

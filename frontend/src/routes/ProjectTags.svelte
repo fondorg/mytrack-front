@@ -13,8 +13,6 @@
         tags = await api.getProjectTags(projectId)
         console.log(tags)
     })
-
-
 </script>
 
 <LinkButton name="Add Tag" href="#/projects/{projectId}/tags/new"/>
