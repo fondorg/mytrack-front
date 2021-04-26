@@ -17,5 +17,5 @@ public class Comment {
 
     private User author;
 
-    private Issue issue;
+    private Long issueId;
 }

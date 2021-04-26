@@ -3,7 +3,6 @@
      * this is a generic view to perform CRUD operations with any instances
      */
 
-    import Layout from '../c8s/Layout.svelte'
     import CenteredFlex from '../c8s/CenteredFlex.svelte'
     import Form from '../c8s/Form.svelte'
     import {push} from "svelte-spa-router";

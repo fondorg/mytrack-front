@@ -50,6 +50,37 @@
 
 {/if}
 
+<style>
+    #desc-container :global(h1) {
+        font-size: 2rem;
+        font-weight: bold;
+    }
+
+    #desc-container :global(h2) {
+        font-size: 1.5rem;
+        font-weight: bold;
+    }
+
+    #desc-container :global(h3) {
+        font-size: 1rem;
+        font-weight: bold;
+    }
+
+    #desc-container :global(h4) {
+        font-size: 0.75rem;
+        font-weight: bold;
+    }
+
+    #desc-container :global(a) {
+        color: blue;
+        text-decoration: underline;
+    }
+
+    #desc-container :global(ol, ul) {
+        list-style: inside;
+    }
+
+</style>
 
 <!--{#if !$isLoading && $isAuthenticated}
     <ProjectList/>

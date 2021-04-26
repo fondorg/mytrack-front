@@ -1,13 +1,13 @@
 package ru.fondorg.mytrackfront.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 import ru.fondorg.mytrackfront.domain.Comment;
 import ru.fondorg.mytrackfront.restclient.ApiRestTemplate;
 import ru.fondorg.mytrackfront.util.ApiPathBuilder;
 import ru.fondorg.mytrackfront.util.ApiV1Paths;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -29,9 +29,9 @@ public class CommentController {
     }
 
     @GetMapping(ApiV1Paths.ISSUE_COMMENTS)
-    public Page<Comment> getIssueComments(@PathVariable Long projectId, @PathVariable Long issueId,
-                                          @RequestParam MultiValueMap<String, String> params) {
-        return apiRestTemplate.exchangeAsPage(pathBuilder.getUrl(ApiV1Paths.ISSUE_COMMENTS, params),
+    public List<Comment> getIssueComments(@PathVariable Long projectId, @PathVariable Long issueId
+                                          /*@RequestParam MultiValueMap<String, String> params*/) {
+        return apiRestTemplate.exchangeAsList(pathBuilder.getUrl(ApiV1Paths.ISSUE_COMMENTS),
                 projectId, issueId);
     }
 
