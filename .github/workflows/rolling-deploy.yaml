@@ -69,14 +69,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Update deployment
-        uses: steebchen/kubectl@master
+        uses: steebchen/kubectl@v2.0.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DO }}
         with:
-          args: "apply -f kubernetes-manifests/mytrack-front-deployment.yaml"
+          config: ${{ secrets.KUBE_CONFIG_DO }}
+          command: "apply -f kubernetes-manifests/mytrack-front-deployment.yaml"
       - name: Rollout restart deployment
         uses: steebchen/kubectl@master
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DO }}
         with:
-          args: "rollout restart deployment/mytrack-front"
+          config: ${{ secrets.KUBE_CONFIG_DO }}
+          command: "rollout restart deployment/mytrack-front"
