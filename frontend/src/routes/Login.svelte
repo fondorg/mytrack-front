@@ -32,7 +32,7 @@
         </div>
     {/if}
 
-    <CenteredFlex extraClasses="mt-10">
+    <CenteredFlex extraClasses="mt-10 mb-4">
         <div class="border-t w-11/12 pb-2"></div>
         <MediumTitle title="General purpose issue tracker"/>
         <div class="text-justify md:w-3/4 px-2 md:px-0">
@@ -40,7 +40,7 @@
                 This is an open source training project that provides issue tracker functionality.
                 The project currently contains a couple of separate services. Source can be found here:
             </div>
-            <ul class="list-disc">
+            <ul class="list-disc ml-4 text-left">
                 <li>
                     <ExtLink href="https://github.com/fondorg/mytrack-srv"
                              title="https://github.com/fondorg/mytrack-srv"/>
@@ -60,8 +60,8 @@
             </div>
             <div class="mt-2">
                 <MediumTitle title="Technology stack"/>
-                <div class="mt-1">Backend:</div>
-                <ul class="list-disc">
+                <div class="mt-1 font-bold text-sm">Backend:</div>
+                <ul class="list-disc ml-4">
                     <li>Spring Boot</li>
                     <li>Spring Data JPA</li>
                     <li>MySQL</li>
@@ -69,8 +69,8 @@
                         <ExtLink href="http://www.querydsl.com/" title="Querydsl"/>
                     </li>
                 </ul>
-                <div class="mt-1">Frontend:</div>
-                <ul class="list-disc">
+                <div class="mt-1 font-bold text-sm">Frontend:</div>
+                <ul class="list-disc ml-4">
                     <li>Spring Boot</li>
                     <li>
                         <ExtLink href="http://svelte.dev" title="Svelte"/>
@@ -106,7 +106,7 @@
             <div class="mt-2">
                 <MediumTitle title="MyTracker features"/>
                 <div>Some main MyTracker features currently available</div>
-                <ul class="list-disc">
+                <ul class="list-disc ml-4">
                     <li>Projects management</li>
                     <li>Issue management</li>
                     <li>Issue tagging</li>
