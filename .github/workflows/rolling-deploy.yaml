@@ -23,6 +23,7 @@ jobs:
           OIDC_CLIENT_ID: ${{ secrets.OIDC_CLIENT_ID }}
           OIDC_REDIRECT_URL: ${{ secrets.OIDC_REDIRECT_URL }}
           OIDC_LOGOUT_REDIRECT_URL: ${{ secrets.OIDC_LOGOUT_REDIRECT_URL }}
+          OIDC_ACCOUNT_SERVICE: ${{ secrets.OIDC_ACCOUNT_SERVICE }}
           API_BASE_URL: ${{ secrets.API_BASE_URL }}
           NODE_ENV: production
       - name: Set up JDK 1.11
