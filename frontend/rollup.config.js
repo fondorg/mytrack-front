@@ -14,6 +14,7 @@ const OIDC_CLIENT_ID = process.env.OIDC_CLIENT_ID;
 const OIDC_REDIRECT_URL = process.env.OIDC_REDIRECT_URL;
 const OIDC_LOGOUT_REDIRECT_URL = process.env.OIDC_LOGOUT_REDIRECT_URL;
 const API_BASE_URL = process.env.API_BASE_URL.replace(/\/$/, "");
+const OIDC_ACCOUNT_SERVICE = process.env.OIDC_ACCOUNT_SERVICE
 
 function serve() {
     let server;
@@ -50,7 +51,8 @@ export default {
             OIDC_CLIENT_ID,
             OIDC_REDIRECT_URL,
             OIDC_LOGOUT_REDIRECT_URL,
-            API_BASE_URL
+            API_BASE_URL,
+            OIDC_ACCOUNT_SERVICE
         }),
         svelte({
             preprocess: sveltePreprocess({postcss: true}),
