@@ -77,7 +77,7 @@ jobs:
           config: ${{ secrets.KUBE_CONFIG_DO }}
           command: "apply -f kubernetes-manifests/mytrack-front-deployment.yaml"
       - name: Rollout restart deployment
-        uses: steebchen/kubectl@master
+        uses: steebchen/kubectl@v2.0.0
         env:
           KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DO }}
         with:
